@@ -36,25 +36,29 @@
 
 /// 广告商品cell的索引
 @property (nonatomic, strong) NSIndexPath *njAdMerchandiseViewIndexPath;
+// 标记是否刷新过
 @property (nonatomic, assign) BOOL njAdMerchandiseViewIndexPathFlag;
+
+- (void)reloadDataWithCompletion:(id)completion;
 
 @end
 
 %hook IGListAdapter
 
-//  广告商品cell的索引
+// 广告商品cell的索引
 %property (nonatomic, strong) NSIndexPath *njAdMerchandiseViewIndexPath;
+// 标记是否刷新过
 %property (nonatomic, assign) BOOL njAdMerchandiseViewIndexPathFlag;
 
 - (id)collectionView:(id)view cellForItemAtIndexPath:(NSIndexPath *)path {
     UICollectionViewCell *cell = %orig;
     if ([cell.reuseIdentifier isEqualToString:@"AdMerchandiseViewBBVideoModule.VDViewSectionControllerCell"]) {
-//        %log((NSString *)@"cxzcxz", path);
+//        %log((NSString *)@"cxzcxz1", path);
         // 保存广告商品cell的索引
         self.njAdMerchandiseViewIndexPath = path;
         if (!self.njAdMerchandiseViewIndexPathFlag) {
             self.njAdMerchandiseViewIndexPathFlag = YES;
-            [view reloadData];
+            [self reloadDataWithCompletion:nil];
         }
         
     }
