@@ -37,7 +37,7 @@
 /// 广告商品cell的索引
 @property (nonatomic, strong) NSIndexPath *njAdMerchandiseViewIndexPath;
 // 标记是否刷新过
-@property (nonatomic, assign) BOOL njAdMerchandiseViewIndexPathFlag;
+@property (nonatomic, strong) NSNumber *njAdMerchandiseViewIndexPathFlag;
 
 - (void)reloadDataWithCompletion:(id)completion;
 
@@ -48,16 +48,16 @@
 // 广告商品cell的索引
 %property (nonatomic, strong) NSIndexPath *njAdMerchandiseViewIndexPath;
 // 标记是否刷新过
-%property (nonatomic, assign) BOOL njAdMerchandiseViewIndexPathFlag;
+%property (nonatomic, strong) NSNumber *njAdMerchandiseViewIndexPathFlag;
 
-- (id)collectionView:(id)view cellForItemAtIndexPath:(NSIndexPath *)path {
+- (id)collectionView:(UICollectionView *)view cellForItemAtIndexPath:(NSIndexPath *)path {
     UICollectionViewCell *cell = %orig;
     if ([cell.reuseIdentifier isEqualToString:@"AdMerchandiseViewBBVideoModule.VDViewSectionControllerCell"]) {
-//        %log((NSString *)@"cxzcxz1", path);
+//         %log((NSString *)@"cxzcxz", path, self.njAdMerchandiseViewIndexPathFlag);
         // 保存广告商品cell的索引
         self.njAdMerchandiseViewIndexPath = path;
         if (!self.njAdMerchandiseViewIndexPathFlag) {
-            self.njAdMerchandiseViewIndexPathFlag = YES;
+            self.njAdMerchandiseViewIndexPathFlag = @(YES);
             [self reloadDataWithCompletion:nil];
         }
         
