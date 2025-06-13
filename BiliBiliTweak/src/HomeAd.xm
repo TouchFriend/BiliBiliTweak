@@ -1,15 +1,15 @@
 
 // See http://iphonedevwiki.net/index.php/Logos
+// 主页广告
 
 #import <UIKit/UIKit.h>
-
+#import "NJCommonDefine.h"
 
 // 列表广告
 %hook AdPGInfoModel
 
 - (id)init {
-//    %log((NSString *)@"cxzcxz");
-    NSLog(@"cxzcxz:%@-%s", NSStringFromClass([self class]), __FUNCTION__);
+    NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
 
@@ -18,8 +18,8 @@
 %hook AdPegasusModel
 
 - (id)init {
-//    %log((NSString *)@"cxzcxz");
-    NSLog(@"cxzcxz:%@-%s", NSStringFromClass([self class]), __FUNCTION__);
+//    %log((NSString *)nj_logPrefix);
+    NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
 
@@ -28,8 +28,8 @@
 %hook AdPGCmInfoModel
 
 - (id)init {
-//    %log((NSString *)@"cxzcxz");
-    NSLog(@"cxzcxz:%@-%s", NSStringFromClass([self class]), __FUNCTION__);
+//    %log((NSString *)nj_logPrefix);
+    NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
 
@@ -40,8 +40,8 @@
 %hook BannerItemModel
 
 - (id)init {
-//    %log((NSString *)@"cxzcxz");
-    NSLog(@"cxzcxz:%@-%s", NSStringFromClass([self class]), __FUNCTION__);
+//    %log((NSString *)nj_logPrefix);
+    NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
 
@@ -51,7 +51,7 @@
 %hook BBHotTopicTopicListModel
 
 - (id)initWithGPBMessage:(id)gpbmessage {
-    %log((NSString *)@"cxzcxz");
+    %log((NSString *)nj_logPrefix);
     return nil;
 }
 
@@ -61,7 +61,7 @@
 %hook BBHotTopicRcmdOneItemModel
 
 - (id)initWithGPBMessage:(id)gpbmessage {
-    %log((NSString *)@"cxzcxz");
+    %log((NSString *)nj_logPrefix);
     return nil;
 }
 

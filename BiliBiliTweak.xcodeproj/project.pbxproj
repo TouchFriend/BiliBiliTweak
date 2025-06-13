@@ -27,6 +27,7 @@
 				src/DetailAd.xm,
 				src/HomeAd.xm,
 				src/LaunchAd.x,
+				src/SearchResult.xm,
 			);
 			target = BF2FD6EE2DF0846E00883B76 /* BiliBiliTweak */;
 		};
@@ -42,6 +43,7 @@
 				src/DetailAd.xm = sourcecode.cpp.objcpp;
 				src/HomeAd.xm = sourcecode.cpp.objcpp;
 				src/LaunchAd.x = sourcecode.c.objc;
+				src/SearchResult.xm = sourcecode.cpp.objcpp;
 			};
 			path = BiliBiliTweak;
 			sourceTree = "<group>";
