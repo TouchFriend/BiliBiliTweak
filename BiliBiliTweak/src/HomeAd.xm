@@ -18,7 +18,6 @@
 %hook AdPegasusModel
 
 - (id)init {
-//    %log((NSString *)nj_logPrefix);
     NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
@@ -28,7 +27,6 @@
 %hook AdPGCmInfoModel
 
 - (id)init {
-//    %log((NSString *)nj_logPrefix);
     NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
@@ -40,7 +38,6 @@
 %hook BannerItemModel
 
 - (id)init {
-//    %log((NSString *)nj_logPrefix);
     NSLog(@"%@:%@-%s", nj_logPrefix, NSStringFromClass([self class]), __FUNCTION__);
     return nil;
 }
