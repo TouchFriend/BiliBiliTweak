@@ -41,21 +41,25 @@
         if (![[self nj_filterIndexPaths] containsObject:indexPath]) {
 //            %log(nj_logPrefix, @"-add", indexPath, [self nj_filterIndexPaths]);
             [[self nj_filterIndexPaths] addObject:indexPath];
-            [collectionView performBatchUpdates:^{
-                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-            } completion:^(BOOL finished) {
-                
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collectionView performBatchUpdates:^{
+                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                } completion:^(BOOL finished) {
+                    
+                }];
+            });
         }
     } else {
         if ([[self nj_filterIndexPaths] containsObject:indexPath]) {
 //            %log(nj_logPrefix, @"-rm", indexPath, [self nj_filterIndexPaths]);
             [[self nj_filterIndexPaths] removeObject:indexPath];
-            [collectionView performBatchUpdates:^{
-                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-            } completion:^(BOOL finished) {
-                
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collectionView performBatchUpdates:^{
+                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                } completion:^(BOOL finished) {
+                    
+                }];
+            });
         }
     }
     return cell;
