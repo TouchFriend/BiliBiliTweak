@@ -66,10 +66,10 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([[self nj_filterIndexPaths] containsObject:indexPath]) {
-//        %log(nj_logPrefix);
-//        return CGSizeMake(0.0, 0.1);
-//    }
+    if ([[self nj_filterIndexPaths] containsObject:indexPath]) {
+        %log(nj_logPrefix);
+        return CGSizeMake(0.0, 0.1);
+    }
     return %orig;
 }
 
