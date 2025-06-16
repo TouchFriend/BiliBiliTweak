@@ -39,8 +39,8 @@
     if ([[self nj_filterCellIds] containsObject:cell.reuseIdentifier] ||
         [[self nj_filterCellTypes] containsObject:NSStringFromClass([cell class])]) {
         if (![[self nj_filterIndexPaths] containsObject:indexPath]) {
-//            %log(nj_logPrefix, @"-add", indexPath, [self nj_filterIndexPaths]);
             [[self nj_filterIndexPaths] addObject:indexPath];
+//            %log(nj_logPrefix, @"-add", indexPath, [self nj_filterIndexPaths]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [collectionView performBatchUpdates:^{
                     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
@@ -51,8 +51,8 @@
         }
     } else {
         if ([[self nj_filterIndexPaths] containsObject:indexPath]) {
-//            %log(nj_logPrefix, @"-rm", indexPath, [self nj_filterIndexPaths]);
             [[self nj_filterIndexPaths] removeObject:indexPath];
+//            %log(nj_logPrefix, @"-rm", indexPath, [self nj_filterIndexPaths]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [collectionView performBatchUpdates:^{
                     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
@@ -66,10 +66,10 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[self nj_filterIndexPaths] containsObject:indexPath]) {
-        %log(nj_logPrefix);
-        return CGSizeMake(0.0, 0.1);
-    }
+//    if ([[self nj_filterIndexPaths] containsObject:indexPath]) {
+//        %log(nj_logPrefix);
+//        return CGSizeMake(0.0, 0.1);
+//    }
     return %orig;
 }
 
