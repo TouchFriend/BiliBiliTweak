@@ -127,3 +127,16 @@
 
 
 %end
+
+@interface BBMediaUniteRelateGameObject : NSObject
+
+@end
+
+// 游戏相关的广告
+%hook BBMediaUniteRelateGameObject
+
+- (id)initWithCard:(id)card {
+    return nil;
+}
+
+%end
