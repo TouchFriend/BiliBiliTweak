@@ -24,10 +24,11 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
-				src/DetailAd.xm,
-				src/HomeAd.xm,
-				src/LaunchAd.x,
-				src/SearchResult.xm,
+				src/Home/NJHotTopicAd.xm,
+				src/Home/NJRcmdAd.xm,
+				src/NJDetailAd.xm,
+				src/NJLaunchAd.x,
+				src/NJSearchResult.xm,
 			);
 			target = BF2FD6EE2DF0846E00883B76 /* BiliBiliTweak */;
 		};
@@ -40,10 +41,11 @@
 				BF2FD70D2DF0847500883B76 /* Exceptions for "BiliBiliTweak" folder in "BiliBiliTweak" target */,
 			);
 			explicitFileTypes = {
-				src/DetailAd.xm = sourcecode.cpp.objcpp;
-				src/HomeAd.xm = sourcecode.cpp.objcpp;
-				src/LaunchAd.x = sourcecode.c.objc;
-				src/SearchResult.xm = sourcecode.cpp.objcpp;
+				src/Home/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
+				src/Home/NJRcmdAd.xm = sourcecode.cpp.objcpp;
+				src/NJDetailAd.xm = sourcecode.cpp.objcpp;
+				src/NJLaunchAd.x = sourcecode.c.objc;
+				src/NJSearchResult.xm = sourcecode.cpp.objcpp;
 			};
 			path = BiliBiliTweak;
 			sourceTree = "<group>";
