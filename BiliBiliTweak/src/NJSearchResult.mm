@@ -62,9 +62,7 @@ static BAPIPolymerAppSearchV1SearchAllResponse* _logos_method$_ungrouped$BAPIPol
         }
         [items addObject:item];
     }
-    NSInteger oldCount = result.itemArray_Count;
     result.itemArray = items;
-
     return result;
 }
 
@@ -82,4 +80,4 @@ static NSSet<NSString *> * _logos_method$_ungrouped$BAPIPolymerAppSearchV1Search
 
 static __attribute__((constructor)) void _logosLocalInit() {
 {Class _logos_class$_ungrouped$BAPIPolymerAppSearchV1SearchAllResponse = objc_getClass("BAPIPolymerAppSearchV1SearchAllResponse"); { MSHookMessageEx(_logos_class$_ungrouped$BAPIPolymerAppSearchV1SearchAllResponse, @selector(initWithData:extensionRegistry:error:), (IMP)&_logos_method$_ungrouped$BAPIPolymerAppSearchV1SearchAllResponse$initWithData$extensionRegistry$error$, (IMP*)&_logos_orig$_ungrouped$BAPIPolymerAppSearchV1SearchAllResponse$initWithData$extensionRegistry$error$);}{ char _typeEncoding[1024]; unsigned int i = 0; memcpy(_typeEncoding + i, @encode(NSSet<NSString *> *), strlen(@encode(NSSet<NSString *> *))); i += strlen(@encode(NSSet<NSString *> *)); _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$BAPIPolymerAppSearchV1SearchAllResponse, @selector(nj_filterCardTypes), (IMP)&_logos_method$_ungrouped$BAPIPolymerAppSearchV1SearchAllResponse$nj_filterCardTypes, _typeEncoding); }} }
-#line 55 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/NJSearchResult.xm"
+#line 53 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/NJSearchResult.xm"

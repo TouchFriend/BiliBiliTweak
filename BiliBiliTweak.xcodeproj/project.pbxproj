@@ -26,6 +26,7 @@
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
 				src/Home/NJHotTopicAd.xm,
 				src/Home/NJRcmdAd.xm,
+				src/NJDebug.xm,
 				src/NJDetailAd.xm,
 				src/NJLaunchAd.x,
 				src/NJSearchResult.xm,
@@ -43,6 +44,7 @@
 			explicitFileTypes = {
 				src/Home/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/NJRcmdAd.xm = sourcecode.cpp.objcpp;
+				src/NJDebug.xm = sourcecode.cpp.objcpp;
 				src/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/NJLaunchAd.x = sourcecode.c.objc;
 				src/NJSearchResult.xm = sourcecode.cpp.objcpp;
