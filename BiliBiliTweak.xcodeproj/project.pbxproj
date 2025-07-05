@@ -10,6 +10,7 @@
 		BF2FD6F32DF0846E00883B76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F22DF0846E00883B76 /* UIKit.framework */; };
 		BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F42DF0846E00883B76 /* Foundation.framework */; };
 		BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */; };
+		BF9C31562E1294EF00FF67F1 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9C31552E1294EF00FF67F1 /* Network.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		BF2FD6F22DF0846E00883B76 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF2FD6F42DF0846E00883B76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CydiaSubstrate.framework; path = Library/Frameworks/CydiaSubstrate.framework; sourceTree = DEVELOPER_DIR; };
+		BF9C31552E1294EF00FF67F1 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -25,7 +27,8 @@
 			membershipExceptions = (
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
 				src/Home/NJHotTopicAd.xm,
-				src/Home/NJRcmdAd.xm,
+				src/Home/rcmd/NJRcmdAd.xm,
+				src/Network/NJNetworkService.xm,
 				src/NJDebug.xm,
 				src/NJDetailAd.xm,
 				src/NJLaunchAd.x,
@@ -35,19 +38,31 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		BFF2D2052E16B10300EC94EC /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = BF2FD6EC2DF0846E00883B76 /* Headers */;
+			membershipExceptions = (
+				src/Network/NJNetworkService.xm,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BF2FD6F82DF0846E00883B76 /* BiliBiliTweak */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				BF2FD70D2DF0847500883B76 /* Exceptions for "BiliBiliTweak" folder in "BiliBiliTweak" target */,
+				BFF2D2052E16B10300EC94EC /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */,
 			);
 			explicitFileTypes = {
 				src/Home/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
-				src/Home/NJRcmdAd.xm = sourcecode.cpp.objcpp;
+				src/Home/rcmd/NJRcmdAd.xm = sourcecode.cpp.objcpp;
 				src/NJDebug.xm = sourcecode.cpp.objcpp;
 				src/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/NJLaunchAd.x = sourcecode.c.objc;
 				src/NJSearchResult.xm = sourcecode.cpp.objcpp;
+				src/Network/NJNetworkService.xm = sourcecode.cpp.objcpp;
 			};
 			path = BiliBiliTweak;
 			sourceTree = "<group>";
@@ -62,6 +77,7 @@
 				BF2FD6F32DF0846E00883B76 /* UIKit.framework in Frameworks */,
 				BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */,
 				BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */,
+				BF9C31562E1294EF00FF67F1 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +104,7 @@
 		BF2FD6F12DF0846E00883B76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF9C31552E1294EF00FF67F1 /* Network.framework */,
 				BF2FD6F22DF0846E00883B76 /* UIKit.framework */,
 				BF2FD6F42DF0846E00883B76 /* Foundation.framework */,
 				BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */,
