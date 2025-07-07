@@ -26,6 +26,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
+				src/Dynamic/NJDynamicAd.xm,
 				src/Home/NJHotTopicAd.xm,
 				src/Home/rcmd/NJRcmdAd.xm,
 				src/Network/NJNetworkService.xm,
@@ -56,6 +57,7 @@
 				BFF2D2052E16B10300EC94EC /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */,
 			);
 			explicitFileTypes = {
+				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/rcmd/NJRcmdAd.xm = sourcecode.cpp.objcpp;
 				src/NJDebug.xm = sourcecode.cpp.objcpp;
