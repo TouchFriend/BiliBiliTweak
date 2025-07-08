@@ -44,7 +44,6 @@ static BBLiveRevenueCardsContentView* _logos_method$_ungrouped$BBLiveRevenueCard
 
 
 
-
 @interface BBLiveVerticalPanelViewController : NSObject
 
 
@@ -73,16 +72,13 @@ static void _logos_method$_ungrouped$BBLiveVerticalPanelViewController$viewWillA
 
 
 static BBLiveBaseAppointmentCardView* _logos_method$_ungrouped$BBLiveBaseAppointmentCardView$initWithEntryFrame$(_LOGOS_SELF_TYPE_INIT BBLiveBaseAppointmentCardView* __unused self, SEL __unused _cmd, CGRect frame) _LOGOS_RETURN_RETAINED {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([self class]), self, __FUNCTION__);
     Class livcVcClass = NSClassFromString(@"BBLiveVerticalPanelViewController");
     id liveVC = [UIViewController findViewControllerOfClass:livcVcClass];
     if (liveVC) {
-        NSLog(@"%@-hasLiveVC:%@-%p-%s-nj_liveAppearDate:%@", nj_logPrefix, NSStringFromClass([self class]), self, __FUNCTION__, [liveVC nj_liveAppearDate]);
         if (![liveVC nj_liveAppearDate]) {
             return nil;
         }
         NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:[liveVC nj_liveAppearDate]];
-        NSLog(@"%@:has nj_liveAppearDate-%@-%p-%s-timeInterval:%lf", nj_logPrefix, NSStringFromClass([self class]), self, __FUNCTION__, timeInterval);
         if (timeInterval < 2.0) {
             return nil;
         }
@@ -94,4 +90,4 @@ static BBLiveBaseAppointmentCardView* _logos_method$_ungrouped$BBLiveBaseAppoint
 
 static __attribute__((constructor)) void _logosLocalInit() {
 {Class _logos_class$_ungrouped$BBLiveRevenueCardsContentView = objc_getClass("BBLiveRevenueCardsContentView"); { MSHookMessageEx(_logos_class$_ungrouped$BBLiveRevenueCardsContentView, @selector(initWithDataSource:viewModel:), (IMP)&_logos_method$_ungrouped$BBLiveRevenueCardsContentView$initWithDataSource$viewModel$, (IMP*)&_logos_orig$_ungrouped$BBLiveRevenueCardsContentView$initWithDataSource$viewModel$);}Class _logos_class$_ungrouped$BBLiveVerticalPanelViewController = objc_getClass("BBLiveVerticalPanelViewController"); { objc_property_attribute_t _attributes[16]; unsigned int attrc = 0; _attributes[attrc++] = (objc_property_attribute_t) { "T", "@\"NSDate\"" }; _attributes[attrc++] = (objc_property_attribute_t) { "&", "" }; _attributes[attrc++] = (objc_property_attribute_t) { "N", "" }; class_addProperty(_logos_class$_ungrouped$BBLiveVerticalPanelViewController, "nj_liveAppearDate", _attributes, attrc); size_t _nBytes = 1024; char _typeEncoding[_nBytes]; snprintf(_typeEncoding, _nBytes, "%s@:", @encode(NSDate *)); class_addMethod(_logos_class$_ungrouped$BBLiveVerticalPanelViewController, @selector(nj_liveAppearDate), (IMP)&_logos_property$_ungrouped$BBLiveVerticalPanelViewController$nj_liveAppearDate, _typeEncoding); snprintf(_typeEncoding, _nBytes, "v@:%s", @encode(NSDate *)); class_addMethod(_logos_class$_ungrouped$BBLiveVerticalPanelViewController, @selector(setNj_liveAppearDate:), (IMP)&_logos_property$_ungrouped$BBLiveVerticalPanelViewController$setNj_liveAppearDate, _typeEncoding); } { MSHookMessageEx(_logos_class$_ungrouped$BBLiveVerticalPanelViewController, @selector(viewWillAppear:), (IMP)&_logos_method$_ungrouped$BBLiveVerticalPanelViewController$viewWillAppear$, (IMP*)&_logos_orig$_ungrouped$BBLiveVerticalPanelViewController$viewWillAppear$);}Class _logos_class$_ungrouped$BBLiveBaseAppointmentCardView = objc_getClass("BBLiveBaseAppointmentCardView"); { MSHookMessageEx(_logos_class$_ungrouped$BBLiveBaseAppointmentCardView, @selector(initWithEntryFrame:), (IMP)&_logos_method$_ungrouped$BBLiveBaseAppointmentCardView$initWithEntryFrame$, (IMP*)&_logos_orig$_ungrouped$BBLiveBaseAppointmentCardView$initWithEntryFrame$);}} }
-#line 67 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Home/Live/NJLiveDetailAd.xm"
+#line 63 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Home/Live/NJLiveDetailAd.xm"
