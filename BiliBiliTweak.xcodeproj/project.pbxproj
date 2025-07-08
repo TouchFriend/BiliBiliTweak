@@ -27,8 +27,9 @@
 			membershipExceptions = (
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
 				src/Dynamic/NJDynamicAd.xm,
-				src/Home/NJHotTopicAd.xm,
-				src/Home/rcmd/NJRcmdAd.xm,
+				src/Home/HotTopic/NJHotTopicAd.xm,
+				src/Home/Live/NJLiveDetailAd.xm,
+				src/Home/Rcmd/NJRcmdAd.xm,
 				src/Network/NJNetworkService.xm,
 				src/NJDebug.xm,
 				src/NJDetailAd.xm,
@@ -58,8 +59,9 @@
 			);
 			explicitFileTypes = {
 				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
-				src/Home/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
-				src/Home/rcmd/NJRcmdAd.xm = sourcecode.cpp.objcpp;
+				src/Home/HotTopic/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
+				src/Home/Live/NJLiveDetailAd.xm = sourcecode.cpp.objcpp;
+				src/Home/Rcmd/NJRcmdAd.xm = sourcecode.cpp.objcpp;
 				src/NJDebug.xm = sourcecode.cpp.objcpp;
 				src/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/NJLaunchAd.x = sourcecode.c.objc;
