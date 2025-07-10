@@ -11,6 +11,7 @@
 #import "NJApiDataItem.h"
 #import "NJRcmdCardDataItem.h"
 #import "NJLiveIndexFeedDataItem.h"
+#import "NJLiveSecondGetListDataItem.h"
 
 @interface NJApiDataManger ()
 
@@ -94,8 +95,9 @@
 
 - (NSArray<Class> *)itemClasses {
     if (!_itemClasses) {
-        _itemClasses = @[[NJRcmdCardDataItem class],        // 首页-推荐
-                         [NJLiveIndexFeedDataItem class],   // 首页-直播-索引
+        _itemClasses = @[[NJRcmdCardDataItem class],            // 首页-推荐
+                         [NJLiveIndexFeedDataItem class],       // 首页-直播-索引
+                         [NJLiveSecondGetListDataItem class],   // 首页-直播-具体板块数据
         ];
     }
     return _itemClasses;
