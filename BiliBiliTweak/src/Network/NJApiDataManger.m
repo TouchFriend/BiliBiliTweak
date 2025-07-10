@@ -12,6 +12,7 @@
 #import "NJRcmdCardDataItem.h"
 #import "NJLiveIndexFeedDataItem.h"
 #import "NJLiveSecondGetListDataItem.h"
+#import "NJAnimeChannelDataItem.h"
 
 @interface NJApiDataManger ()
 
@@ -98,6 +99,7 @@
         _itemClasses = @[[NJRcmdCardDataItem class],            // 首页-推荐
                          [NJLiveIndexFeedDataItem class],       // 首页-直播-索引
                          [NJLiveSecondGetListDataItem class],   // 首页-直播-具体板块数据
+                         [NJAnimeChannelDataItem class],        // 首页-动画
         ];
     }
     return _itemClasses;
