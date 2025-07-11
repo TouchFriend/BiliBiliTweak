@@ -40,22 +40,11 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		BFF2D2052E16B10300EC94EC /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = BF2FD6EC2DF0846E00883B76 /* Headers */;
-			membershipExceptions = (
-				src/Network/NJNetworkService.xm,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BF2FD6F82DF0846E00883B76 /* BiliBiliTweak */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				BF2FD70D2DF0847500883B76 /* Exceptions for "BiliBiliTweak" folder in "BiliBiliTweak" target */,
-				BFF2D2052E16B10300EC94EC /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */,
 			);
 			explicitFileTypes = {
 				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
