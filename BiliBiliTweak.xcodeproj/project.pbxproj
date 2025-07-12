@@ -34,7 +34,7 @@
 				src/NJDebug.xm,
 				src/NJDetailAd.xm,
 				src/NJLaunchAd.x,
-				src/NJSearchResult.xm,
+				src/Search/NJSearchResultAd.xm,
 			);
 			target = BF2FD6EE2DF0846E00883B76 /* BiliBiliTweak */;
 		};
@@ -54,8 +54,8 @@
 				src/NJDebug.xm = sourcecode.cpp.objcpp;
 				src/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/NJLaunchAd.x = sourcecode.c.objc;
-				src/NJSearchResult.xm = sourcecode.cpp.objcpp;
 				src/Network/NJNetworkService.xm = sourcecode.cpp.objcpp;
+				src/Search/NJSearchResultAd.xm = sourcecode.cpp.objcpp;
 			};
 			path = BiliBiliTweak;
 			sourceTree = "<group>";
