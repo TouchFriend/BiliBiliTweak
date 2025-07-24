@@ -35,6 +35,7 @@
 				src/NJDetailAd.xm,
 				src/NJLaunchAd.x,
 				src/Search/NJSearchResultAd.xm,
+				src/Setting/NJSetting.xm,
 			);
 			target = BF2FD6EE2DF0846E00883B76 /* BiliBiliTweak */;
 		};
@@ -56,6 +57,7 @@
 				src/NJLaunchAd.x = sourcecode.c.objc;
 				src/Network/NJNetworkService.xm = sourcecode.cpp.objcpp;
 				src/Search/NJSearchResultAd.xm = sourcecode.cpp.objcpp;
+				src/Setting/NJSetting.xm = sourcecode.cpp.objcpp;
 			};
 			path = BiliBiliTweak;
 			sourceTree = "<group>";
