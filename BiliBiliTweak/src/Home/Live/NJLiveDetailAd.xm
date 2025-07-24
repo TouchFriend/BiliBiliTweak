@@ -131,7 +131,6 @@
 
 // 弹幕下面的购物推荐卡
 - (void)_showShoppingRecommendViewWithInfo:(id)info completion:(id)completion {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
 }
 
 %end
