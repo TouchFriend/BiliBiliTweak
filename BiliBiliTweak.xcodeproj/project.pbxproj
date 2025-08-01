@@ -26,16 +26,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
+				src/Detail/NJDetailAd.xm,
 				src/Dynamic/NJDynamicAd.xm,
 				src/Home/HotTopic/NJHotTopicAd.xm,
 				src/Home/Live/NJLiveDetailAd.xm,
 				src/Home/Rcmd/NJRcmdAd.xm,
+				src/Launch/NJLaunchAd.x,
 				src/Network/NJNetworkService.xm,
-				src/NJDebug.xm,
-				src/NJDetailAd.xm,
-				src/NJLaunchAd.x,
 				src/Search/NJSearchResultAd.xm,
 				src/Setting/NJSetting.xm,
+				src/Tool/NJDebug.xm,
 			);
 			target = BF2FD6EE2DF0846E00883B76 /* BiliBiliTweak */;
 		};
@@ -48,16 +48,16 @@
 				BF2FD70D2DF0847500883B76 /* Exceptions for "BiliBiliTweak" folder in "BiliBiliTweak" target */,
 			);
 			explicitFileTypes = {
+				src/Detail/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/HotTopic/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/Live/NJLiveDetailAd.xm = sourcecode.cpp.objcpp;
 				src/Home/Rcmd/NJRcmdAd.xm = sourcecode.cpp.objcpp;
-				src/NJDebug.xm = sourcecode.cpp.objcpp;
-				src/NJDetailAd.xm = sourcecode.cpp.objcpp;
-				src/NJLaunchAd.x = sourcecode.c.objc;
+				src/Launch/NJLaunchAd.x = sourcecode.c.objc;
 				src/Network/NJNetworkService.xm = sourcecode.cpp.objcpp;
 				src/Search/NJSearchResultAd.xm = sourcecode.cpp.objcpp;
 				src/Setting/NJSetting.xm = sourcecode.cpp.objcpp;
+				src/Tool/NJDebug.xm = sourcecode.cpp.objcpp;
 			};
 			path = BiliBiliTweak;
 			sourceTree = "<group>";
