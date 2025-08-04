@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
 #import "UIApplication+NJCategory.h"
+#import "NJSettingSkullTableViewCell.h"
 
 @interface BBPhoneSettingMainVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,8 +30,8 @@
 
 // 保存开关
 %new
-- (void)nj_autoChange:(UISwitch *)autoSwitch {
-    [NJ_USER_DEFAULTS setBool:autoSwitch.isOn forKey:NJ_MASTER_SWITCH_KEY];
+- (void)nj_masterSwitchChange:(UISwitch *)masterSwitch {
+    [NJ_USER_DEFAULTS setBool:masterSwitch.isOn forKey:NJ_MASTER_SWITCH_KEY];
     [self nj_rebootTip];
 }
 
@@ -54,20 +55,18 @@
     if (indexPath.section != [self numberOfSectionsInTableView:tableView] - 1) {
         return %orig;
     }
-    NSString *reuseIdentifier = indexPath.row == 0 ? @"autoRedPacketCellId" : @"exitCellId";
+    NSString *reuseIdentifier = indexPath.row == 0 ? @"masterSwitchCellId" : @"exitCellId";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.imageView.image = [UIImage imageWithContentsOfFile:NJ_ASSET_PATH(@"skull.png")];
+        cell = [[NJSettingSkullTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    
+    // 总开关
     if (indexPath.row == 0) {
         cell.textLabel.text = @"总开关";
-        UISwitch *autoSwitch = [[UISwitch alloc] init];
-        cell.accessoryView = autoSwitch;
-        autoSwitch.on = NJ_MASTER_SWITCH_VALUE;
-        [autoSwitch addTarget:self action:@selector(nj_autoChange:) forControlEvents:UIControlEventValueChanged];
+        UISwitch *masterSwitch = [[UISwitch alloc] init];
+        cell.accessoryView = masterSwitch;
+        masterSwitch.on = NJ_MASTER_SWITCH_VALUE;
+        [masterSwitch addTarget:self action:@selector(nj_masterSwitchChange:) forControlEvents:UIControlEventValueChanged];
     }
     return cell;
 }

@@ -11,6 +11,7 @@
 		BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F42DF0846E00883B76 /* Foundation.framework */; };
 		BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */; };
 		BF9C31562E1294EF00FF67F1 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9C31552E1294EF00FF67F1 /* Network.framework */; };
+		BFE0B1EC2E40B9630084F9F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE0B1EB2E40B9630084F9F3 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		BF2FD6F42DF0846E00883B76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CydiaSubstrate.framework; path = Library/Frameworks/CydiaSubstrate.framework; sourceTree = DEVELOPER_DIR; };
 		BF9C31552E1294EF00FF67F1 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
+		BFE0B1EB2E40B9630084F9F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -72,6 +74,7 @@
 				BF2FD6F32DF0846E00883B76 /* UIKit.framework in Frameworks */,
 				BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */,
 				BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */,
+				BFE0B1EC2E40B9630084F9F3 /* CoreGraphics.framework in Frameworks */,
 				BF9C31562E1294EF00FF67F1 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +102,7 @@
 		BF2FD6F12DF0846E00883B76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFE0B1EB2E40B9630084F9F3 /* CoreGraphics.framework */,
 				BF9C31552E1294EF00FF67F1 /* Network.framework */,
 				BF2FD6F22DF0846E00883B76 /* UIKit.framework */,
 				BF2FD6F42DF0846E00883B76 /* Foundation.framework */,
