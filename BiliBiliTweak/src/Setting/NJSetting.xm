@@ -62,7 +62,7 @@
     }
     // 总开关
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"总开关";
+        [(NJSettingSkullTableViewCell *)cell setTitle:@"总开关"];
         UISwitch *masterSwitch = [[UISwitch alloc] init];
         cell.accessoryView = masterSwitch;
         masterSwitch.on = NJ_MASTER_SWITCH_VALUE;
@@ -108,3 +108,11 @@
 
 
 
+%hook UIImageView
+
+- (void)liveSD_setImageWithURL:(id)url placeholderImage:(id)image options:(long long)options completed:(id)completed {
+
+    %orig;
+}
+
+%end
