@@ -72,7 +72,7 @@
     if (!uri || ![uri isKindOfClass:[NSString class]]) {
         return tabData;
     }
-    // 活动版块
+    // 活动版块，比如新征程
     if ([uri containsString:@"home_activity_tab"]) {
         return nil;
     }
