@@ -21,6 +21,9 @@
 @property (nonatomic, strong) UIImageView *skullImageView;
 /// 标题
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
+/// 数据
+@property (nonatomic, strong, readwrite) NJSettingSkullViewModel *viewModle;
+
 
 
 @end
@@ -116,8 +119,9 @@
 
 #pragma mark - Public Methods
 
-- (void)setTitle:(NSString *)title {
-    self.titleLabel.text = title;
+- (void)bindViewModel:(NJSettingSkullViewModel *)viewModle {
+    self.viewModle = viewModle;
+    self.titleLabel.text = viewModle.title;
 }
 
 #pragma mark - Private Methods
