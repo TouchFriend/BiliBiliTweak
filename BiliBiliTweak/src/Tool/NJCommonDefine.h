@@ -32,4 +32,36 @@ UIKIT_EXTERN const NSString *nj_logPrefix;
 
 /// --------------------- 设置页面 ---------------------
 
+/// --------------------- 单例 ---------------------
+
+// .h头文件中的单例宏
+#define NJ_SINGLETON_H(name) \
++ (instancetype)shared##name;
+
+// .m文件中的单例宏
+#define NJ_SINGLETON_M(name) \
+static id _instance; \
++ (instancetype)allocWithZone:(struct _NSZone *)zone { \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        _instance = [super allocWithZone:zone]; \
+    }); \
+    return _instance; \
+} \
++ (instancetype)shared##name { \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        _instance = [[self alloc] init]; \
+    }); \
+    return _instance; \
+} \
+- (id)copyWithZone:(NSZone *)zone { \
+    return _instance; \
+} \
+- (id)mutableCopyWithZone:(nullable NSZone *)zone { \
+    return _instance; \
+} \
+
+/// --------------------- 单例 ---------------------
+
 NS_ASSUME_NONNULL_END
