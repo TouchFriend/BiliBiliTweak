@@ -2,20 +2,18 @@
 
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
-#import "UIApplication+NJCategory.h"
-#import "NJSettingSkullTableViewCell.h"
-#import "NJSettingSkullViewModel.h"
 #import <objc/objc-runtime.h>
+#import "NJSettingSkullTableViewCell.h"
+#import "NJSettingMasterSwitchTableViewCell.h"
+#import "NJSettingSkullViewModel.h"
+#import "NJSettingSeparatorHeaderView.h"
 
-#define NJ_COMMON_CELL_ID @"CommonCellId"
+#define NJ_COMMON_CELL_ID @"commonCellId"
 #define NJ_MASTER_SWITCH_CELL_ID @"masterSwitchCellId"
+#define NJ_SEPARATOR_HEADER_ID @"separatorHeaderView"
 
 @interface BBPhoneSettingMainVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-// 保存开关
-- (void)nj_autoChange:(UISwitch *)autoSwitch;
-// 重启提示
-- (void)nj_rebootTip;
 // 是否是设置页面
 - (BOOL)nj_isSettingViewController;
 /// 是否注册过cell
@@ -51,28 +49,7 @@
     return %orig;
 }
 
-// 保存开关
-%new
-- (void)nj_masterSwitchChange:(UISwitch *)masterSwitch {
-    [NJ_USER_DEFAULTS setBool:masterSwitch.isOn forKey:NJ_MASTER_SWITCH_KEY];
-    [self nj_rebootTip];
-}
 
-// 重启提示
-%new
-- (void)nj_rebootTip {
-    UIViewController *vc = [UIApplication nj_topMostViewController];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"重启应用生效"
-                                                                   message:nil
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    [vc presentViewController:alert animated:YES completion:^{
-        // 当弹窗展示完成后，延迟2秒再自动关闭
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)),
-                       dispatch_get_main_queue(), ^{
-            [alert dismissViewControllerAnimated:YES completion:nil];
-        });
-    }];
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![self nj_isSettingViewController] ||
@@ -84,14 +61,6 @@
     NJSettingSkullTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier
                                     forIndexPath:indexPath];
     [cell bindViewModel:viewModel];
-    // 总开关
-//    if (indexPath.row == 0) {
-//        [(NJSettingSkullTableViewCell *)cell setTitle:@"总开关"];
-//        UISwitch *masterSwitch = [[UISwitch alloc] init];
-//        cell.accessoryView = masterSwitch;
-//        masterSwitch.on = NJ_MASTER_SWITCH_VALUE;
-//        [masterSwitch addTarget:self action:@selector(nj_masterSwitchChange:) forControlEvents:UIControlEventValueChanged];
-//    }
     return cell;
 }
 
@@ -118,8 +87,8 @@
         section != [self numberOfSectionsInTableView:tableView] - 1) {
         return nil;
     }
-    UIView *headerView = [[UIView alloc] init];
-    headerView.backgroundColor = [UIColor clearColor];
+    
+    UIView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NJ_SEPARATOR_HEADER_ID];
     return headerView;
 }
 
@@ -164,8 +133,12 @@
 - (void)nj_registerCell:(UITableView *)tableView {
     if (!self.nj_isRegisteredCell || ![self.nj_isRegisteredCell boolValue]) {
         self.nj_isRegisteredCell = @(YES);
-        [tableView registerClass:[NJSettingSkullTableViewCell class] forCellReuseIdentifier:NJ_MASTER_SWITCH_CELL_ID];
+        // register cell
+        [tableView registerClass:[NJSettingMasterSwitchTableViewCell class] forCellReuseIdentifier:NJ_MASTER_SWITCH_CELL_ID];
         [tableView registerClass:[NJSettingSkullTableViewCell class] forCellReuseIdentifier:NJ_COMMON_CELL_ID];
+        
+        // register Header
+        [tableView registerClass:[NJSettingSeparatorHeaderView class] forHeaderFooterViewReuseIdentifier:NJ_SEPARATOR_HEADER_ID];
     }
 }
 

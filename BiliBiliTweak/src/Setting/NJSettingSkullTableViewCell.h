@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)bindViewModel:(NJSettingSkullViewModel *)viewModle;
 
+- (void)setupUI;
+
 @end
 
 NS_ASSUME_NONNULL_END
