@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIImageView *skullImageView;
 /// 标题
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
+/// 副标题
+@property (nonatomic, strong, readwrite) UILabel *subTitleLabel;
 /// 数据
 @property (nonatomic, strong, readwrite) NJSettingSkullViewModel *viewModle;
 /// 分割线
@@ -42,6 +44,13 @@
     return self;
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    
+    self.titleLabel.text = @"";
+    self.subTitleLabel.text = @"";
+}
+
 #pragma mark - Do Init
 
 - (void)doInit {
@@ -55,7 +64,11 @@
                                                  dark:[UIColor nj_colorWithHexString:@"#FF17181A"]];
 
     [self setupSkullImageView];
+
     [self setupTitleLabel];
+    
+    [self setupSubTitleLabel];
+    
     [self setupSeparatorView];
 }
 
@@ -80,7 +93,20 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.skullImageView.mas_right).mas_offset(10.0);
         make.centerY.mas_equalTo(self.contentView);
-        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-6.0);
+    }];
+}
+
+- (void)setupSubTitleLabel {
+    self.subTitleLabel = [[UILabel alloc] init];
+    [self.contentView addSubview:self.subTitleLabel];
+    self.subTitleLabel.font = [UIFont systemFontOfSize:14];
+    self.subTitleLabel.textAlignment = NSTextAlignmentRight;
+    self.subTitleLabel.textColor = [UIColor nj_colorWithLight:[UIColor nj_colorWithHexString:@"#9499a0"]
+                                                      dark:[UIColor nj_colorWithHexString:@"#757a81"]];
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.titleLabel.mas_right).mas_offset(6.0);
+        make.centerY.mas_equalTo(self.contentView);
+        make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-28.0);
     }];
 }
 
@@ -142,6 +168,7 @@
 - (void)bindViewModel:(NJSettingSkullViewModel *)viewModle {
     self.viewModle = viewModle;
     self.titleLabel.text = viewModle.title;
+    self.subTitleLabel.text = viewModle.subTitle;
 }
 
 #pragma mark - Private Methods

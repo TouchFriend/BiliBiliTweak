@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *cellId;
 /// 标题
 @property (nonatomic, copy) NSString *title;
+/// 副标题
+@property (nonatomic, copy) NSString *subTitle;
+
 
 - (instancetype)initWithBizId:(NSString *)bizId
                        cellId:(NSString *)cellId

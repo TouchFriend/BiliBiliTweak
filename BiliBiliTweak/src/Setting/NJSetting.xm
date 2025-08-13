@@ -7,10 +7,9 @@
 #import "NJSettingMasterSwitchTableViewCell.h"
 #import "NJSettingSkullViewModel.h"
 #import "NJSettingSeparatorHeaderView.h"
+#import "NJSettingDefine.h"
+#import "NJSettingInjectDataProvider.h"
 
-#define NJ_COMMON_CELL_ID @"commonCellId"
-#define NJ_MASTER_SWITCH_CELL_ID @"masterSwitchCellId"
-#define NJ_SEPARATOR_HEADER_ID @"separatorHeaderView"
 
 @interface BBPhoneSettingMainVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -112,17 +111,8 @@
 - (NSArray<NJSettingSkullViewModel *> *)nj_injectDatas {
     NSArray *datas = objc_getAssociatedObject(self, @selector(skullDatas));
     if (!datas) {
-        NSMutableArray *arr = [NSMutableArray array];
-        [arr addObject:[[NJSettingSkullViewModel alloc] initWithBizId:@"masterSwitch"
-                                                               cellId:NJ_MASTER_SWITCH_CELL_ID
-                                                                title:@"总开关"]];
-        [arr addObject:[[NJSettingSkullViewModel alloc] initWithBizId:@"ShareData"
-                                                               cellId:NJ_COMMON_CELL_ID
-                                                                title:@"分享数据"]];
-        [arr addObject:[[NJSettingSkullViewModel alloc] initWithBizId:@"AppVersion"
-                                                               cellId:NJ_COMMON_CELL_ID
-                                                                title:@"版本"]];
-        datas = [arr copy];
+        NJSettingInjectDataProvider *dataProvider = [[NJSettingInjectDataProvider alloc] init];
+        datas = [dataProvider injectDatas];
         objc_setAssociatedObject(self, @selector(skullDatas), datas, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return datas;
