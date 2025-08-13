@@ -9,7 +9,7 @@
 #import "NJSettingSeparatorHeaderView.h"
 #import "NJSettingDefine.h"
 #import "NJSettingInjectDataProvider.h"
-
+#import "NJShareManager.h"
 
 @interface BBPhoneSettingMainVC : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -78,6 +78,12 @@
         return;
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NJSettingSkullViewModel *viewModel = [self nj_injectDatas][indexPath.row];
+    NSString *bizId = viewModel.bizId;
+    if ([bizId isEqualToString:NJ_SHARE_DATA_BIZ_ID]) { // 分享数据
+        [NJShareManager shareCacheFolder];
+    }
 }
 
 %new

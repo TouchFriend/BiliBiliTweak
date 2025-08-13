@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF09ABB62E4CA1A400160C03 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF09ABB52E4CA1A400160C03 /* QuartzCore.framework */; };
+		BF09AC312E4CB55200160C03 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BF09AC2C2E4CB39B00160C03 /* libz.tbd */; };
+		BF09AC322E4CB55C00160C03 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BF09ABB92E4CA33C00160C03 /* libiconv.tbd */; };
+		BF09AC332E4CB56B00160C03 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF09ABB72E4CA1E600160C03 /* Security.framework */; };
 		BF2FD6F32DF0846E00883B76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F22DF0846E00883B76 /* UIKit.framework */; };
 		BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F42DF0846E00883B76 /* Foundation.framework */; };
 		BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF09ABB52E4CA1A400160C03 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		BF09ABB72E4CA1E600160C03 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		BF09ABB92E4CA33C00160C03 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
+		BF09AC2C2E4CB39B00160C03 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		BF2FD6EF2DF0846E00883B76 /* BiliBiliTweak.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = BiliBiliTweak.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2FD6F22DF0846E00883B76 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BF2FD6F42DF0846E00883B76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,8 +79,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF09AC332E4CB56B00160C03 /* Security.framework in Frameworks */,
+				BF09AC322E4CB55C00160C03 /* libiconv.tbd in Frameworks */,
+				BF09AC312E4CB55200160C03 /* libz.tbd in Frameworks */,
 				BF2FD6F32DF0846E00883B76 /* UIKit.framework in Frameworks */,
 				BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */,
+				BF09ABB62E4CA1A400160C03 /* QuartzCore.framework in Frameworks */,
 				BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */,
 				BFE0B1EC2E40B9630084F9F3 /* CoreGraphics.framework in Frameworks */,
 				BF9C31562E1294EF00FF67F1 /* Network.framework in Frameworks */,
@@ -102,6 +114,10 @@
 		BF2FD6F12DF0846E00883B76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF09AC2C2E4CB39B00160C03 /* libz.tbd */,
+				BF09ABB92E4CA33C00160C03 /* libiconv.tbd */,
+				BF09ABB72E4CA1E600160C03 /* Security.framework */,
+				BF09ABB52E4CA1A400160C03 /* QuartzCore.framework */,
 				BFE0B1EB2E40B9630084F9F3 /* CoreGraphics.framework */,
 				BF9C31552E1294EF00FF67F1 /* Network.framework */,
 				BF2FD6F22DF0846E00883B76 /* UIKit.framework */,
@@ -239,11 +255,20 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BiliBiliTweak/src/Tool",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BiliBiliTweak/BiliBiliTweak-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"NJ_TWEAK=1",
+					HAVE_INTTYPES_H,
+					HAVE_PKCRYPT,
+					HAVE_STDINT_H,
+					HAVE_WZAES,
+					HAVE_ZLIB,
 				);
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
 				LIBRARY_SEARCH_PATHS = (
@@ -259,6 +284,7 @@
 				MonkeyDevInstallOnAnyBuild = YES;
 				MonkeyDevInstallOnProfiling = YES;
 				MonkeyDevkillProcessOnInstall = SpringBoard;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -274,11 +300,20 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BiliBiliTweak/src/Tool",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BiliBiliTweak/BiliBiliTweak-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"NJ_TWEAK=1",
+					HAVE_INTTYPES_H,
+					HAVE_PKCRYPT,
+					HAVE_STDINT_H,
+					HAVE_WZAES,
+					HAVE_ZLIB,
 				);
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
 				LIBRARY_SEARCH_PATHS = (
@@ -294,6 +329,7 @@
 				MonkeyDevInstallOnAnyBuild = YES;
 				MonkeyDevInstallOnProfiling = YES;
 				MonkeyDevkillProcessOnInstall = SpringBoard;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

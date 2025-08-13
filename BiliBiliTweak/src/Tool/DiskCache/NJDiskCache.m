@@ -8,7 +8,7 @@
 #import "NJDiskCache.h"
 
 // 沙盒缓存文件夹
-static NSString *const NJDiskCacheDirName = @"NJCache";
+NSString *const NJDiskCacheDirName = @"NJCache";
 
 @interface NJDiskCache ()
 

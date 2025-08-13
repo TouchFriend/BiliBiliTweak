@@ -16,10 +16,10 @@
 /// 要注入的数据
 - (NSArray<NJSettingSkullViewModel *> *)injectDatas {
     NSMutableArray *datas = [NSMutableArray array];
-    [datas addObject:[[NJSettingSkullViewModel alloc] initWithBizId:@"masterSwitch"
+    [datas addObject:[[NJSettingSkullViewModel alloc] initWithBizId:NJ_MASTER_SWITCH_BIZ_ID
                                                            cellId:NJ_MASTER_SWITCH_CELL_ID
                                                             title:@"总开关"]];
-    [datas addObject:[[NJSettingSkullViewModel alloc] initWithBizId:@"ShareData"
+    [datas addObject:[[NJSettingSkullViewModel alloc] initWithBizId:NJ_SHARE_DATA_BIZ_ID
                                                              cellId:NJ_COMMON_CELL_ID
                                                               title:@"分享数据"]];
     [datas addObject:[self version]];
@@ -27,7 +27,7 @@
 }
 
 - (NJSettingSkullViewModel *)version {
-    NJSettingSkullViewModel *model = [[NJSettingSkullViewModel alloc] initWithBizId:@"AppVersion"
+    NJSettingSkullViewModel *model = [[NJSettingSkullViewModel alloc] initWithBizId:NJ_APP_VERSION_BIZ_ID
                                                                              cellId:NJ_COMMON_CELL_ID
                                                                               title:@"版本"];
     model.subTitle = [NJPluginInfo versionInfo];
