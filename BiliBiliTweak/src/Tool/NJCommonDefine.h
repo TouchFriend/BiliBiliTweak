@@ -20,7 +20,7 @@ UIKIT_EXTERN const NSString *nj_logPrefix;
 /// UserDefaults
 #define NJ_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
 /// 资源路径
-#define NJ_ASSET_PATH(path) [NJAsset assetPathWithName:path]
+#define NJ_ASSET_PATH(path) [NJAsset pathForImageAsset:path]
 
 
 /// --------------------- 设置页面 ---------------------
