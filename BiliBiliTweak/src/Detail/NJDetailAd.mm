@@ -54,7 +54,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BAPIAppViewuniteCommonRelates; @class BAPIAppViewuniteV1IntroductionTab; @class BBAdSourceContent; @class BBAdCommonBaseModel; @class BBAdUGCContext; @class BAPIAppViewuniteV1RelatesFeedReply; 
+@class BBAdUGCContext; @class BAPIAppViewuniteV1RelatesFeedReply; @class BAPIAppViewuniteCommonRelates; @class BBAdCommonBaseModel; @class BBAdSourceContent; @class BAPIAppViewuniteV1IntroductionTab; 
 
 
 #line 33 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJDetailAd.xm"
