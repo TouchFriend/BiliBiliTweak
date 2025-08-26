@@ -1,15 +1,15 @@
-Package: com.cxz.test.BiliBiliTweak
-Name: BiliBiliTweak
+Package: com.touchWorld.bilibiliTweak
+Name: BilibiliTweak
 Version: 0.1.0
-Description:
+Description: 去除哔哩哔哩广告
 Section: System
 Depends: firmware (>= 5.0), mobilesubstrate
 Conflicts: 
 Replaces: 
 Priority: optional
 Architecture: iphoneos-arm
-Author: touchWorld
-dev: 
+Author: TouchWorld
+dev:
 Homepage: 
 Depiction: 
 Maintainer: 
