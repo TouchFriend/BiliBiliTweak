@@ -44,6 +44,7 @@
 				src/Launch/NJLaunchAd.x,
 				src/Network/NJNetworkService.xm,
 				src/Search/NJSearchResultAd.xm,
+				src/Setting/NJHD2Setting.xm,
 				src/Setting/NJSetting.xm,
 				src/Tool/NJDebug.xm,
 			);
@@ -66,6 +67,7 @@
 				src/Launch/NJLaunchAd.x = sourcecode.c.objc;
 				src/Network/NJNetworkService.xm = sourcecode.cpp.objcpp;
 				src/Search/NJSearchResultAd.xm = sourcecode.cpp.objcpp;
+				src/Setting/NJHD2Setting.xm = sourcecode.cpp.objcpp;
 				src/Setting/NJSetting.xm = sourcecode.cpp.objcpp;
 				src/Tool/NJDebug.xm = sourcecode.cpp.objcpp;
 			};
