@@ -1,5 +1,5 @@
 # BiliBiliTweak
-![Platform](https://img.shields.io/badge/platform-iOS%2CiPadOS-blue.svg) [![Release](https://img.shields.io/github/v/release/TouchFriend/BiliBiliTweak?color=brightgreen)](https://github.com/TouchFriend/BiliBiliMApp/releases)
+![Platform](https://img.shields.io/badge/platform-iOS%2CiPadOS-blue.svg) [![Release](https://img.shields.io/github/v/release/TouchFriend/BiliBiliTweak?color=brightgreen)](https://github.com/TouchFriend/BiliBiliTweak/releases)
 ![support](https://img.shields.io/badge/support-bilibili%208.41.0+-blue.svg)
 
 
