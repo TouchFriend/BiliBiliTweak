@@ -1,8 +1,8 @@
 Package: com.touchWorld.bilibiliTweak
 Name: BilibiliTweak
-Version: 0.1.0
-Description: 去除哔哩哔哩广告
-Section: System
+Version: 1.0.0
+Description: 去除哔哩哔哩广告插件
+Section: Tweaks
 Depends: firmware (>= 5.0), mobilesubstrate
 Conflicts: 
 Replaces: 
@@ -10,8 +10,8 @@ Priority: optional
 Architecture: iphoneos-arm
 Author: TouchWorld
 dev:
-Homepage: 
-Depiction: 
-Maintainer: 
-Icon: 
+Homepage: https://github.com/TouchFriend/BiliBiliTweak
+Depiction:
+Maintainer: TouchWorld
+Icon: https://touchfriend.github.io/depictions/com.touchWorld.bilibiliTweak/icon.png
 

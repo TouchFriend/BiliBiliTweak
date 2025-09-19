@@ -7,6 +7,14 @@
 
 非越狱手机版本：[无广告版哔哩哔哩](https://github.com/TouchFriend/BiliBiliMApp)
 
+## 快速使用
+
+在越狱设备上打开 `Cydia`应用：
+
+- `软件源` > `编辑` > `添加` > 输入 https://touchfriend.github.io。
+- 检查列表是否显示 `TouchFriend's Repo`。
+- 打开`TouchFriend's Repo` > 插件 > `BilibiliTweak`，进行安装。
+
 ## 如何使用
 
 - 安装[MonkeyDev](https://github.com/AloneMonkey/MonkeyDev)
