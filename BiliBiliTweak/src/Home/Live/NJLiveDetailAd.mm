@@ -27,7 +27,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBLiveRevenueCardsContentView; @class BBLiveFollowCardAlertComponent; @class BBLiveChainView; @class BBLiveBaseAreaRankEntryView; @class BBLiveBaseAppointmentCardView; @class BBLiveTopRightEntranceManager; @class BBLiveShoppingExplainCardViewModel; @class BBLiveBaseAppointmentEntryView; @class BBLiveVerticalPanelViewController; @class BBLiveBaseMixedRankEntryView; @class BBLiveBasePopularRankEntryView; @class BBLiveBaseUserRankListEntryView; @class BBLiveVerticalCenterBar; @class BBLiveBaseAnimationView; @class BBLiveBasePopularHotRankEntryView; @class BBLiveFunctionCardTaskManager; 
+@class BBLiveBaseUserRankListEntryView; @class BBLiveTopRightEntranceManager; @class BBLiveChainView; @class BBLiveShoppingExplainCardViewModel; @class BBLiveBasePopularRankEntryView; @class BBLiveBaseAreaRankEntryView; @class BBLiveBaseAppointmentCardView; @class BBLiveBaseAppointmentEntryView; @class BBLiveVerticalCenterBar; @class BBLiveBaseMixedRankEntryView; @class BBLiveFollowCardAlertComponent; @class BBLiveBasePopularHotRankEntryView; @class BBLiveVerticalPanelViewController; @class BBLiveRevenueCardsContentView; @class BBLiveFunctionCardTaskManager; @class BBLiveBaseAnimationView; 
 
 
 #line 6 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Home/Live/NJLiveDetailAd.xm"
