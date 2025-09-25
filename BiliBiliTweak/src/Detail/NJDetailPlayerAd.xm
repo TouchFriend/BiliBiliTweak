@@ -40,13 +40,15 @@
  
  
  BBPlayerHalfScreenBottomWidget // 半屏底部组件
-    BBPlayerFlexContainerWidget *_leftControlWidget;    // 左边组件
-        BBPlayerPlayAndPauseWidget      // 播放和暂停
-        BBPlayerSeekbarWidgetV2         // 时间滑动条
-        BBPlayerTimeHintLabelWidget     // 时间提示标签
-    BBPlayerFlexContainerWidget *_rightControlWidget;   // 右边组件
-        BBPlayerSwitchScreenWidget      //  全屏按钮
-        BBPlayerBizGotoStoryWidget      //  横屏视频的竖屏全屏按钮
+    BBPlayerFlexContainerWidget *_leftControlWidget;    // 左边控制组件
+        NSArray *subWidgets // 拥有的子组件
+            BBPlayerPlayAndPauseWidget      // 播放和暂停
+            BBPlayerSeekbarWidgetV2         // 时间滑动条
+            BBPlayerTimeHintLabelWidget     // 时间提示标签
+    BBPlayerFlexContainerWidget *_rightControlWidget;   // 右边控制组件
+        NSArray *subWidgets // 拥有的子组件
+            BBPlayerSwitchScreenWidget      //  全屏按钮
+            BBPlayerBizGotoStoryWidget      //  横屏视频的竖屏全屏按钮
  */
 
 #import <UIKit/UIKit.h>
