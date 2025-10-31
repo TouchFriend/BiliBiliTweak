@@ -38,6 +38,7 @@
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
 				src/Detail/NJDetailAd.xm,
 				src/Detail/NJDetailPlayerAd.xm,
+				src/Detail/NJPlaybackRate.xm,
 				src/Dynamic/NJDynamicAd.xm,
 				src/Home/HotTopic/NJHotTopicAd.xm,
 				src/Home/Live/NJLiveDetailAd.xm,
@@ -47,6 +48,7 @@
 				src/Search/NJSearchResultAd.xm,
 				src/Setting/NJHD2Setting.xm,
 				src/Setting/NJSetting.xm,
+				"src/Tool/BiliBiliTweak-Bridging-Header.h",
 				src/Tool/NJDebug.xm,
 			);
 			target = BF2FD6EE2DF0846E00883B76 /* BiliBiliTweak */;
@@ -62,6 +64,7 @@
 			explicitFileTypes = {
 				src/Detail/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/Detail/NJDetailPlayerAd.xm = sourcecode.cpp.objcpp;
+				src/Detail/NJPlaybackRate.xm = sourcecode.cpp.objcpp;
 				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/HotTopic/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/Live/NJLiveDetailAd.xm = sourcecode.cpp.objcpp;
@@ -179,6 +182,7 @@
 				TargetAttributes = {
 					BF2FD6EE2DF0846E00883B76 = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -252,6 +256,7 @@
 		BF2FD7072DF0846E00883B76 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -290,6 +295,8 @@
 				MonkeyDevkillProcessOnInstall = SpringBoard;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BiliBiliTweak/src/Tool/BiliBiliTweak-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -297,6 +304,7 @@
 		BF2FD7082DF0846E00883B76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -335,6 +343,9 @@
 				MonkeyDevkillProcessOnInstall = SpringBoard;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BiliBiliTweak/src/Tool/BiliBiliTweak-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;

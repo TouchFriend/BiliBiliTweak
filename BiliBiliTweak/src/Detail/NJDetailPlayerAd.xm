@@ -117,6 +117,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
+#import "BBPlayerPlayerRateModel.h"
 
 %group App
 
@@ -224,6 +225,94 @@
 }
 
 %end
+
+/*
+%hook BBPlayerFloatingWidgetView
+
+- (id)initWithContext:(id)context rootWidget:(id)widget {
+//    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+
+%end
+ */
+
+/*
+%hook BBPlayerNavigationWidget
+
+- (id)initWithContext:(id)context config:(id)config {
+    return %orig;
+}
+
+- (void)didLayoutSubWidgets {
+    %orig;
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+}
+
+- (void)pushWidget:(id)widget animated:(_Bool)animated completion:(id)completion {
+    %orig;
+}
+
+- (void)addWidget:(id)widget animated:(_Bool)animated completion:(id)completion {
+    %orig;
+}
+
+%end
+ */
+
+/// 视频播放器
+@interface IJKFFMoviePlayerControllerFFPlay : NSObject
+
+@property (readonly, nonatomic) float realPlaybackRate;
+@property (readonly, nonatomic) float maxPlaybackRate;
+@property (nonatomic) float playbackRate;
+
+@end
+
+%hook IJKFFMoviePlayerControllerFFPlay
+/*
+- (void)setPlaybackRate:(float)playbackRate {
+    %orig;
+    NSLog(@"%@:%@-%p-%s-inplaybackRate:%lf-playbackRate:%lf-realPlaybackRate%lf-maxPlaybackRate:%lf", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, playbackRate, self.playbackRate, self.realPlaybackRate, self.maxPlaybackRate);
+}
+
+- (id)initWithContentURL:(id)url withOptions:(id)options {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+- (id)initWithContentURLString:(id)urlstring withOptions:(id)options {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+- (id)initWithMoreContent:(id)content withOptions:(id)options withGLView:(id)glview {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+- (id)initWithMoreContentString:(id)string withOptions:(id)options withGLView:(id)glview{
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+- (id)initUsingItemWithOptions:(id)options withGLView:(id)glview {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+*/
+
+%end
+
+// 播放速度模型
+%hook BBPlayerPlayerRateModel
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; value = %f; text = %@>",
+            NSStringFromClass([self class]),
+            self,
+            self.value,
+            self.text ?: @"(null)"];
+}
+
+%end
+
 
 %end
 
