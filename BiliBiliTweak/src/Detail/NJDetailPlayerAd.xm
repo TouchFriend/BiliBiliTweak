@@ -270,7 +270,7 @@
 @end
 
 %hook IJKFFMoviePlayerControllerFFPlay
-/*
+
 - (void)setPlaybackRate:(float)playbackRate {
     %orig;
     NSLog(@"%@:%@-%p-%s-inplaybackRate:%lf-playbackRate:%lf-realPlaybackRate%lf-maxPlaybackRate:%lf", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, playbackRate, self.playbackRate, self.realPlaybackRate, self.maxPlaybackRate);
@@ -296,7 +296,7 @@
     NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
     return %orig;
 }
-*/
+
 
 %end
 
@@ -313,11 +313,83 @@
 
 %end
 
+@interface VKSettingViewSelectModel : NSObject // (Swift)
+
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSArray *items;
+@property (nonatomic, copy) id selectChangeCallback;
+@property (nonatomic, strong) NSNumber *nj_isChangeBlock;
+
+@end
+
+typedef void (^MyBlockType)(long long index, NSArray *array);
+
+%hook VKSettingViewSelectModel
+
+%property (nonatomic, strong) NSNumber *nj_isChangeBlock;
+
+- (id)init {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+
+- (void)setName:(NSString *)name {
+    NSLog(@"%@:%@-%p-%s-name：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, name);
+    %orig;
+}
+
+- (NSString *)name {
+    id name = %orig;
+    if ([name isEqualToString:@"倍速"] && (![self nj_isChangeBlock] || ![[self nj_isChangeBlock] boolValue])) {
+        NSLog(@"%@:%@-%p-%s-change rate value", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+        void (^oldCb)(long long index, NSArray *array) = [self selectChangeCallback];
+        void (^newCb)(long long index, NSArray *array) = ^(long long index, NSArray *array) {
+            NSLog(@"%@:%@-%p-%s-index:%lld-array:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, index, array);
+            if (oldCb) {
+                oldCb(index, @[]);
+            }
+        };
+        [self setNj_isChangeBlock:@(1)];
+        [self setSelectChangeCallback:newCb];
+//        [self setItems:@[@"0.5",@"1.0",@"1.25",@"1.5",@"2.0",@"3.0"]];
+    }
+    NSLog(@"%@:%@-%p-%s-name：%@-items:%@-selectChangeCallback:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, name, [self items], [self selectChangeCallback]);
+    return name;
+}
+
+- (void)setItems:(NSArray *)items {
+    %orig;
+    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, items);
+}
+
+- (NSArray *)items {
+    id items = %orig;
+    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, items);
+    return items;
+}
+
+%end
+
+%hook VKSettingVCFlowLayoutAdapter
+/*
+- (id)init {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+
+- (long long)numberOfSectionsInCollectionView:(id)view {
+    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
+    return %orig;
+}
+*/
+%end
+
 
 %end
 
 %ctor {
     if (NJ_MASTER_SWITCH_VALUE) {
-        %init(App);
+        %init(App, VKSettingViewSelectModel = objc_getClass("_TtC13VKSettingView11SelectModel"),
+              VKSettingVCFlowLayoutAdapter = objc_getClass("_TtC13VKSettingViewP33_EC00434726C52C8727469D0B0D494E6128VKSettingVCFlowLayoutAdapter"));
     }
 }

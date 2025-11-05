@@ -8,6 +8,7 @@
 #import "NJCommonDefine.h"
 
 
+
 #define NJ_PLAYBACK_RATE_MAX 4
 
 static id (*orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray)() = NULL;
@@ -107,6 +108,21 @@ static long long my_change_playback_rate(long long result, float a2) {
     return ret;
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+void *orig_change_vertical_playback_rate;
+
+void my_change_vertical_playback_rate(long long a1, unsigned long long a2, long long a3, long long a4);
+
+#ifdef __cplusplus
+}
+#endif
+
+
+
 
 intptr_t g_slide;
 
@@ -153,9 +169,10 @@ __attribute__((constructor)) static void __init__(void) {
                    (void**)&orig_get_max_playback_rate);
     
     
-    long long change_playback_rate_address = g_slide+0x10F0A70B4;
-    NSLog(@"[%@] cal func change_playback_rate address:0x%llx", nj_logPrefix, change_playback_rate_address);
-    MSHookFunction((void *)change_playback_rate_address,
-                   (void*)my_change_playback_rate,
-                   (void**)&orig_change_playback_rate);
+    
+    long long change_vertical_playback_rate_address = g_slide+0x10A9966AC;
+    NSLog(@"[%@] cal func change_vertical_playback_rate address:0x%llx", nj_logPrefix, change_vertical_playback_rate_address);
+    MSHookFunction((void *)change_vertical_playback_rate_address,
+                   (void*)my_change_vertical_playback_rate,
+                   (void**)&orig_change_vertical_playback_rate);
 }

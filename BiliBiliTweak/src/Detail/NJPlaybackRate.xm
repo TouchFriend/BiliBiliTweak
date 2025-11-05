@@ -5,6 +5,7 @@
 #import <dlfcn.h>
 #import "NJChangePlaybackRateTool.h"
 #import "NJCommonDefine.h"
+//#import "BiliBiliTweak-Swift.h"
 
 // 最大播放速度
 #define NJ_PLAYBACK_RATE_MAX 4
@@ -106,6 +107,21 @@ static long long my_change_playback_rate(long long result, float a2) {
     return ret;
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// 导入swift定义的全局变量
+void *orig_change_vertical_playback_rate;
+// 导入swift定义的c函数
+void my_change_vertical_playback_rate(long long a1, unsigned long long a2, long long a3, long long a4);
+
+#ifdef __cplusplus
+}
+#endif
+
+
+
 // ASLR的偏移量
 intptr_t g_slide;
 
@@ -151,10 +167,11 @@ __attribute__((constructor)) static void __init__(void) {
                    (void*)my_get_max_playback_rate,
                    (void**)&orig_get_max_playback_rate);
     
-    // 更改播放速度方法
-    long long change_playback_rate_address = g_slide+0x10F0A70B4;
-    NSLog(@"[%@] cal func change_playback_rate address:0x%llx", nj_logPrefix, change_playback_rate_address);
-    MSHookFunction((void *)change_playback_rate_address,
-                   (void*)my_change_playback_rate,
-                   (void**)&orig_change_playback_rate);
+    // void __fastcall sub_10A9966AC(__int64 a1, unsigned __int64 a2, __int64 a3, __int64 a4)
+    // 更改竖屏播放速度方法
+    long long change_vertical_playback_rate_address = g_slide+0x10A9966AC;
+    NSLog(@"[%@] cal func change_vertical_playback_rate address:0x%llx", nj_logPrefix, change_vertical_playback_rate_address);
+    MSHookFunction((void *)change_vertical_playback_rate_address,
+                   (void*)my_change_vertical_playback_rate,
+                   (void**)&orig_change_vertical_playback_rate);
 }
