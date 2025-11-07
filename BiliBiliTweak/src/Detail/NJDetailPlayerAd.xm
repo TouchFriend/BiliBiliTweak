@@ -115,9 +115,14 @@
  
  */
 
+/*
+ 当前播放速度可以从 BBPlayerObject => BBPlayerContext => BBPlayerPlayback => playbackRate
+ */
+
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
 #import "BBPlayerPlayerRateModel.h"
+#import "BBPlayerObject.h"
 
 %group App
 
@@ -346,7 +351,7 @@ typedef void (^MyBlockType)(long long index, NSArray *array);
         void (^newCb)(long long index, NSArray *array) = ^(long long index, NSArray *array) {
             NSLog(@"%@:%@-%p-%s-index:%lld-array:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, index, array);
             if (oldCb) {
-                oldCb(index, @[]);
+                oldCb(index, array);
             }
         };
         [self setNj_isChangeBlock:@(1)];
@@ -384,12 +389,93 @@ typedef void (^MyBlockType)(long long index, NSArray *array);
 */
 %end
 
+%hook BBPlayerSupportedPlaybackRate
 
++ (id)supportedPlaybackRateModelArr {
+    id ret = %orig;
+    NSLog(@"%@:%@-%p-%s-ret:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, ret);
+    return ret;
+}
+
+%end
+
+@interface VKSettingViewTabModel : NSObject
+
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic) CGSize itemsSize;
+@property (nonatomic, copy) NSArray *items;
+@property (nonatomic) long long selectedIndex;
+@property (nonatomic, copy) NSString *dynamicSelectedString;
+@property (nonatomic) _Bool enableRepeatSelect;
+@property (nonatomic, copy) id selectChangeCallback;
+
+- (id)init;
+
+@end
+
+%hook VKSettingViewTabModel
+
+- (void)setItems:(NSArray *)items {
+    %orig;
+    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, items);
+}
+
+- (void)setSelectedIndex:(long long)selectedIndex {
+    %orig;
+    NSLog(@"%@:%@-%p-%s-items：%lld", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, selectedIndex);
+}
+
+- (void)setSelectChangeCallback:(id)selectChangeCallback {
+    %orig;
+    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, selectChangeCallback);
+}
+
+%end
+
+%hook NSArray
+
++ (instancetype)arrayWithObjects:(id *)objects count:(NSUInteger)cnt {
+    if (cnt != 6) {
+        return %orig;
+    }
+    NSArray *origArr = %orig(objects, cnt);
+    // 用 __autoreleasing 修饰数组元素
+    __autoreleasing id oldRates[] = {
+        @"0.5",
+        @"0.75",
+        @"1.0",
+        @"1.25",
+        @"1.5",
+        @"2.0"
+    };
+    NSUInteger oldRatesCount = sizeof(oldRates) / sizeof(oldRates[0]);
+    // 传数组名即可，数组名会退化为指针类型 __autoreleasing id *
+    NSArray *oldRatesArr = %orig(oldRates, oldRatesCount);
+    if (cnt == 6 && [origArr isEqualToArray:oldRatesArr]) {
+        __autoreleasing id newRates[] = {
+            @"0.5",
+            @"1.0",
+            @"1.25",
+            @"1.5",
+            @"2.0",
+            @"3.0"
+        };
+        NSUInteger newRatesCount = sizeof(newRates) / sizeof(newRates[0]);
+        NSArray *newRatesArr = %orig(newRates, newRatesCount);
+        return newRatesArr;
+    }
+    return origArr;
+}
+
+%end
+
+ 
 %end
 
 %ctor {
     if (NJ_MASTER_SWITCH_VALUE) {
         %init(App, VKSettingViewSelectModel = objc_getClass("_TtC13VKSettingView11SelectModel"),
-              VKSettingVCFlowLayoutAdapter = objc_getClass("_TtC13VKSettingViewP33_EC00434726C52C8727469D0B0D494E6128VKSettingVCFlowLayoutAdapter"));
+              VKSettingVCFlowLayoutAdapter = objc_getClass("_TtC13VKSettingViewP33_EC00434726C52C8727469D0B0D494E6128VKSettingVCFlowLayoutAdapter"),
+              VKSettingViewTabModel = objc_getClass("_TtC13VKSettingView8TabModel"));
     }
 }

@@ -11,14 +11,16 @@
 
 #define NJ_PLAYBACK_RATE_MAX 4
 
-static id (*orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray)() = NULL;
 
-static id hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray() {
-    id origArr = orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray();
-    NJChangePlaybackRateTool *tool = [[NJChangePlaybackRateTool alloc] init];
-    [tool changePlaybackRateWithRateArray:[NSArray arrayWithArray:origArr]];
-    return origArr;
-}
+
+
+
+
+
+
+
+
+
 
 
 typedef void (*orig_get_max_playback_rate_t)(
@@ -117,6 +119,11 @@ void *orig_change_vertical_playback_rate;
 
 void my_change_vertical_playback_rate(long long a1, unsigned long long a2, long long a3, long long a4);
 
+
+void *orig_supportedPlaybackRateModelArr;
+
+int64_t my_supportedPlaybackRateModelArr();
+
 #ifdef __cplusplus
 }
 #endif
@@ -155,11 +162,11 @@ __attribute__((constructor)) static void __init__(void) {
     _dyld_register_func_for_add_image(_register_func_for_add_image);
     
     
-    long long rateArray_address = g_slide+0x10D829128;
-    NSLog(@"[%@] cal func rateArray address:0x%llx", nj_logPrefix, rateArray_address);
-    MSHookFunction((void *)rateArray_address,
-            (void*)hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray,
-            (void**)&orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray);
+
+
+
+
+
     
     
     long long get_max_playback_rate_address = g_slide+0x10F101034;
@@ -175,4 +182,17 @@ __attribute__((constructor)) static void __init__(void) {
     MSHookFunction((void *)change_vertical_playback_rate_address,
                    (void*)my_change_vertical_playback_rate,
                    (void**)&orig_change_vertical_playback_rate);
+    
+    
+    
+    long long supportedPlaybackRateModelArr_address = g_slide+0x10D82E870;
+    NSLog(@"[%@] cal func supportedPlaybackRateModelArr_address address:0x%llx", nj_logPrefix, supportedPlaybackRateModelArr_address);
+    MSHookFunction((void *)supportedPlaybackRateModelArr_address,
+                   (void*)my_supportedPlaybackRateModelArr,
+                   (void**)&orig_supportedPlaybackRateModelArr);
+    
+    
+    long long playbackRate_address = g_slide+0x116E603E0;
+    uint8_t *p = (uint8_t *)playbackRate_address;
+    strcpy((char *)p, "3.0");
 }

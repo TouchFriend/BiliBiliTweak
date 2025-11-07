@@ -8,6 +8,8 @@
 #ifndef BBPlayerPlayerRateModel_h
 #define BBPlayerPlayerRateModel_h
 
+#import <UIKit/UIKit.h>
+
 @interface BBPlayerPlayerRateModel : NSObject // (Swift)
 
 @property (nonatomic) double value;

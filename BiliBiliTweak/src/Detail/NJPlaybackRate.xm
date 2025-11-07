@@ -10,6 +10,7 @@
 // 最大播放速度
 #define NJ_PLAYBACK_RATE_MAX 4
 
+/*
 static id (*orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray)() = NULL;
 // 播放速度数组
 static id hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray() {
@@ -18,6 +19,7 @@ static id hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray() {
     [tool changePlaybackRateWithRateArray:[NSArray arrayWithArray:origArr]];
     return origArr;
 }
+ */
 
 // 1) 定义原函数的原型 —— 必须和目标函数签名完全一致
 typedef void (*orig_get_max_playback_rate_t)(
@@ -116,6 +118,11 @@ void *orig_change_vertical_playback_rate;
 // 导入swift定义的c函数
 void my_change_vertical_playback_rate(long long a1, unsigned long long a2, long long a3, long long a4);
 
+
+void *orig_supportedPlaybackRateModelArr;
+// 导入swift定义的c函数
+int64_t my_supportedPlaybackRateModelArr();
+
 #ifdef __cplusplus
 }
 #endif
@@ -153,12 +160,12 @@ static void _register_func_for_add_image(const struct mach_header *header, intpt
 __attribute__((constructor)) static void __init__(void) {
     _dyld_register_func_for_add_image(_register_func_for_add_image);
     
-    // 播放速度数组
-    long long rateArray_address = g_slide+0x10D829128;
-    NSLog(@"[%@] cal func rateArray address:0x%llx", nj_logPrefix, rateArray_address);
-    MSHookFunction((void *)rateArray_address,
-            (void*)hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray,
-            (void**)&orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray);
+    // [横屏视频-全屏播放]播放速度数组
+//    long long rateArray_address = g_slide+0x10D829128;
+//    NSLog(@"[%@] cal func rateArray address:0x%llx", nj_logPrefix, rateArray_address);
+//    MSHookFunction((void *)rateArray_address,
+//            (void*)hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray,
+//            (void**)&orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray);
     
     // 获取最大播放速度方法
     long long get_max_playback_rate_address = g_slide+0x10F101034;
@@ -168,10 +175,23 @@ __attribute__((constructor)) static void __init__(void) {
                    (void**)&orig_get_max_playback_rate);
     
     // void __fastcall sub_10A9966AC(__int64 a1, unsigned __int64 a2, __int64 a3, __int64 a4)
-    // 更改竖屏播放速度方法
+    // [横屏视频-半屏播放]更改竖屏播放速度方法
     long long change_vertical_playback_rate_address = g_slide+0x10A9966AC;
     NSLog(@"[%@] cal func change_vertical_playback_rate address:0x%llx", nj_logPrefix, change_vertical_playback_rate_address);
     MSHookFunction((void *)change_vertical_playback_rate_address,
                    (void*)my_change_vertical_playback_rate,
                    (void**)&orig_change_vertical_playback_rate);
+    
+    // __int64 sub_10D82E870()
+    // [横屏视频-全屏播放]播放速度数组
+    long long supportedPlaybackRateModelArr_address = g_slide+0x10D82E870;
+    NSLog(@"[%@] cal func supportedPlaybackRateModelArr_address address:0x%llx", nj_logPrefix, supportedPlaybackRateModelArr_address);
+    MSHookFunction((void *)supportedPlaybackRateModelArr_address,
+                   (void*)my_supportedPlaybackRateModelArr,
+                   (void**)&orig_supportedPlaybackRateModelArr);
+    
+    // 0000000116E603E0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
+    long long playbackRate_address = g_slide+0x116E603E0;
+    uint8_t *p = (uint8_t *)playbackRate_address;
+    strcpy((char *)p, "3.0");
 }
