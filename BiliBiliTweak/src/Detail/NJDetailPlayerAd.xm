@@ -322,58 +322,26 @@
 
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSArray *items;
-@property (nonatomic, copy) id selectChangeCallback;
 @property (nonatomic, strong) NSNumber *nj_isChangeBlock;
 
 @end
-
-typedef void (^MyBlockType)(long long index, NSArray *array);
 
 %hook VKSettingViewSelectModel
 
 %property (nonatomic, strong) NSNumber *nj_isChangeBlock;
 
-- (id)init {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-
-- (void)setName:(NSString *)name {
-    NSLog(@"%@:%@-%p-%s-name：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, name);
-    %orig;
-}
-
 - (NSString *)name {
     id name = %orig;
     if ([name isEqualToString:@"倍速"] && (![self nj_isChangeBlock] || ![[self nj_isChangeBlock] boolValue])) {
-        NSLog(@"%@:%@-%p-%s-change rate value", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-        void (^oldCb)(long long index, NSArray *array) = [self selectChangeCallback];
-        void (^newCb)(long long index, NSArray *array) = ^(long long index, NSArray *array) {
-            NSLog(@"%@:%@-%p-%s-index:%lld-array:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, index, array);
-            if (oldCb) {
-                oldCb(index, array);
-            }
-        };
         [self setNj_isChangeBlock:@(1)];
-        [self setSelectChangeCallback:newCb];
-//        [self setItems:@[@"0.5",@"1.0",@"1.25",@"1.5",@"2.0",@"3.0"]];
+        [self setItems:@[@"0.5",@"1.0",@"1.25",@"1.5",@"2.0",@"3.0"]];
+        NSLog(@"%@:%@-%p-%s-name：%@-items:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, name, [self items]);
     }
-    NSLog(@"%@:%@-%p-%s-name：%@-items:%@-selectChangeCallback:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, name, [self items], [self selectChangeCallback]);
     return name;
 }
 
-- (void)setItems:(NSArray *)items {
-    %orig;
-    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, items);
-}
-
-- (NSArray *)items {
-    id items = %orig;
-    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, items);
-    return items;
-}
-
 %end
+ 
 
 %hook VKSettingVCFlowLayoutAdapter
 /*
@@ -432,6 +400,8 @@ typedef void (^MyBlockType)(long long index, NSArray *array);
 
 %end
 
+
+// [竖屏视频-全屏播放]的播放速度
 %hook NSArray
 
 + (instancetype)arrayWithObjects:(id *)objects count:(NSUInteger)cnt {

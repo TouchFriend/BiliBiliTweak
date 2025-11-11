@@ -129,6 +129,10 @@ int64_t my_supportedPlaybackRateModelArr();
 
 
 
+
+
+
+
 // ASLR的偏移量
 intptr_t g_slide;
 
@@ -155,6 +159,42 @@ static void _register_func_for_add_image(const struct mach_header *header, intpt
     //     g_slide = slide;
     //     NSLog(@"[cxzcxz] g_slide:%ld", g_slide);
     // }
+}
+
+
+static int write_string_to_address(uintptr_t dest_addr, const char *str) {
+    if (str == NULL) {
+        return -1;
+    }
+
+    char *dest = (char *)dest_addr;
+
+    // 注意：这里没有进一步的安全校验（例如页面可写性、缓冲区大小等）
+    strcpy(dest, str);
+
+    return 0;
+}
+
+
+// [横屏视频-半屏播放]的播放速度
+static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
+    // 0000000116E60390  30 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  0.5.............
+    write_string_to_address(g_slide+0x116E60390, "0.5");
+    
+    // 0000000116E603A0  30 2E 37 35 00 00 00 00  00 00 00 00 00 00 00 E4  0.75............
+    write_string_to_address(g_slide+0x116E603A0, "1.0");
+    
+    // 0000000116E603B0  31 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.0.............
+    write_string_to_address(g_slide+0x116E603B0, "1.25");
+    
+    // 0000000116E603C0  31 2E 32 35 00 00 00 00  00 00 00 00 00 00 00 E4  1.25............
+    write_string_to_address(g_slide+0x116E603C0, "1.5");
+    
+    // 0000000116E603D0  31 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.5.............
+    write_string_to_address(g_slide+0x116E603D0 , "2.0");
+    
+    // 0000000116E603E0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
+    write_string_to_address(g_slide+0x116E603E0, "3.0");
 }
 
 __attribute__((constructor)) static void __init__(void) {
@@ -190,8 +230,11 @@ __attribute__((constructor)) static void __init__(void) {
                    (void*)my_supportedPlaybackRateModelArr,
                    (void**)&orig_supportedPlaybackRateModelArr);
     
-    // 0000000116E603E0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
-    long long playbackRate_address = g_slide+0x116E603E0;
-    uint8_t *p = (uint8_t *)playbackRate_address;
-    strcpy((char *)p, "3.0");
+    // [横屏视频-半屏播放]的播放速度
+    changePlaybackRates_LandscapeVideo_HalfScreenPlayback();
+    
 }
+
+
+
+

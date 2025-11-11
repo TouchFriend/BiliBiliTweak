@@ -131,6 +131,10 @@ int64_t my_supportedPlaybackRateModelArr();
 
 
 
+
+
+
+
 intptr_t g_slide;
 
 
@@ -156,6 +160,42 @@ static void _register_func_for_add_image(const struct mach_header *header, intpt
     
     
     
+}
+
+
+static int write_string_to_address(uintptr_t dest_addr, const char *str) {
+    if (str == NULL) {
+        return -1;
+    }
+
+    char *dest = (char *)dest_addr;
+
+    
+    strcpy(dest, str);
+
+    return 0;
+}
+
+
+
+static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
+    
+    write_string_to_address(g_slide+0x116E60390, "0.5");
+    
+    
+    write_string_to_address(g_slide+0x116E603A0, "1.0");
+    
+    
+    write_string_to_address(g_slide+0x116E603B0, "1.25");
+    
+    
+    write_string_to_address(g_slide+0x116E603C0, "1.5");
+    
+    
+    write_string_to_address(g_slide+0x116E603D0 , "2.0");
+    
+    
+    write_string_to_address(g_slide+0x116E603E0, "3.0");
 }
 
 __attribute__((constructor)) static void __init__(void) {
@@ -192,7 +232,10 @@ __attribute__((constructor)) static void __init__(void) {
                    (void**)&orig_supportedPlaybackRateModelArr);
     
     
-    long long playbackRate_address = g_slide+0x116E603E0;
-    uint8_t *p = (uint8_t *)playbackRate_address;
-    strcpy((char *)p, "3.0");
+    changePlaybackRates_LandscapeVideo_HalfScreenPlayback();
+    
 }
+
+
+
+
