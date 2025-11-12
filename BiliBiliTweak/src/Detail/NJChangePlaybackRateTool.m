@@ -13,7 +13,7 @@ static const double NJChangePlaybackRateFlag = 3.0;
 @interface NJChangePlaybackRateTool ()
 
 /// 播放速度
-@property (nonatomic, strong) NSArray<NSNumber *> *playbackRates;
+@property (nonatomic, strong) NSArray<NSString *> *playbackRates;
 
 @end
 
@@ -32,7 +32,7 @@ static const double NJChangePlaybackRateFlag = 3.0;
 #pragma mark - Do Init
 
 - (void)doInit {
-    self.playbackRates = @[@0.5, @1.0, @1.25, @1.5, @2.0, @3.0, @4.0, @5.0, @6.0, @7.0];
+    self.playbackRates = @[@"0.5", @"1.0", @"1.25", @"1.5", @"2.0", @"3.0"];
 }
 
 #pragma mark - Override Methods
@@ -49,14 +49,9 @@ static const double NJChangePlaybackRateFlag = 3.0;
     NSInteger count = MIN(rateCount, newRateCount);
     for (NSInteger i = 0; i < count; i++) {
         BBPlayerPlayerRateModel *rateModel = rateArray[i];
-        NSNumber *newRate = self.playbackRates[i];
-        rateModel.value = newRate.doubleValue;
-        NSString *text = [NSString stringWithFormat:@"%.2f", newRate.doubleValue];
-        // 去掉末尾多余的 0（例如 1.00 → 1.0）
-        while ([text hasSuffix:@"0"] && ![text hasSuffix:@".0"]) {
-            text = [text substringToIndex:text.length - 1];
-        }
-        rateModel.text = text;
+        NSString *newRateStr = self.playbackRates[i];
+        rateModel.value = newRateStr.doubleValue;
+        rateModel.text = newRateStr;
     }
 //    NSLog(@"[%@] change after rateArray = %@, class:%@", nj_logPrefix, rateArray, NSStringFromClass([rateArray class]));
     return rateArray;

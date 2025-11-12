@@ -242,7 +242,7 @@
 %end
  */
 
-/*
+
 %hook BBPlayerNavigationWidget
 
 - (id)initWithContext:(id)context config:(id)config {
@@ -263,7 +263,7 @@
 }
 
 %end
- */
+
 
 /// 视频播放器
 @interface IJKFFMoviePlayerControllerFFPlay : NSObject

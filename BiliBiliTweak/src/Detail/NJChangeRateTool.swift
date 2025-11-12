@@ -40,20 +40,16 @@ public typealias orig_supportedPlaybackRateModelArr_type = @convention(c) () -> 
 nonisolated(unsafe) public var orig_supportedPlaybackRateModelArr: orig_supportedPlaybackRateModelArr_type? = nil
 
 @_cdecl("my_supportedPlaybackRateModelArr")
-func my_supportedPlaybackRateModelArr() -> UnsafeRawPointer {
-    NSLog("[cxzcxz]:my_supportedPlaybackRateModelArr")
+func my_supportedPlaybackRateModelArr() -> Int64 {
     if let orig_supportedPlaybackRateModelArr {
         let origPtr = orig_supportedPlaybackRateModelArr()
         let origArr = unsafeBitCast(origPtr, to: [NSObject].self)
         let tool = NJChangePlaybackRateTool()
         tool.changePlaybackRate(withRateArray: origArr)
-        let retPtr = unsafeBitCast(origArr, to: UnsafeRawPointer.self)
+        let retPtr = unsafeBitCast(origArr, to: Int64.self)
         return retPtr
     }
-    let newArr = [NSObject]()
-    let retPtr = unsafeBitCast(newArr, to: UnsafeRawPointer.self)
-    return retPtr
-
+    return 0
 }
 
 
