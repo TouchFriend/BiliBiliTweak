@@ -231,40 +231,6 @@
 
 %end
 
-/*
-%hook BBPlayerFloatingWidgetView
-
-- (id)initWithContext:(id)context rootWidget:(id)widget {
-//    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-
-%end
- */
-
-
-%hook BBPlayerNavigationWidget
-
-- (id)initWithContext:(id)context config:(id)config {
-    return %orig;
-}
-
-- (void)didLayoutSubWidgets {
-    %orig;
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-}
-
-- (void)pushWidget:(id)widget animated:(_Bool)animated completion:(id)completion {
-    %orig;
-}
-
-- (void)addWidget:(id)widget animated:(_Bool)animated completion:(id)completion {
-    %orig;
-}
-
-%end
-
-
 /// 视频播放器
 @interface IJKFFMoviePlayerControllerFFPlay : NSObject
 
@@ -278,30 +244,8 @@
 
 - (void)setPlaybackRate:(float)playbackRate {
     %orig;
-    NSLog(@"%@:%@-%p-%s-inplaybackRate:%lf-playbackRate:%lf-realPlaybackRate%lf-maxPlaybackRate:%lf", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, playbackRate, self.playbackRate, self.realPlaybackRate, self.maxPlaybackRate);
+    NSLog(@"%@:%@-%p-%s-inputPlaybackRate:%lf-changedPlaybackRate:%lf-realPlaybackRate%lf-maxPlaybackRate:%lf", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, playbackRate, self.playbackRate, self.realPlaybackRate, self.maxPlaybackRate);
 }
-
-- (id)initWithContentURL:(id)url withOptions:(id)options {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-- (id)initWithContentURLString:(id)urlstring withOptions:(id)options {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-- (id)initWithMoreContent:(id)content withOptions:(id)options withGLView:(id)glview {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-- (id)initWithMoreContentString:(id)string withOptions:(id)options withGLView:(id)glview{
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-- (id)initUsingItemWithOptions:(id)options withGLView:(id)glview {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-
 
 %end
 
@@ -322,19 +266,19 @@
 
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSArray *items;
-@property (nonatomic, strong) NSNumber *nj_isChangeBlock;
+@property (nonatomic, strong) NSNumber *nj_isChangeFlag;
 
 @end
 
 // [横屏视频-半屏播放]更改竖屏播放速度方法-修复显示倍速问题
 %hook VKSettingViewSelectModel
 
-%property (nonatomic, strong) NSNumber *nj_isChangeBlock;
+%property (nonatomic, strong) NSNumber *nj_isChangeFlag;
 
 - (NSString *)name {
-    id name = %orig;
-    if ([name isEqualToString:@"倍速"] && (![self nj_isChangeBlock] || ![[self nj_isChangeBlock] boolValue])) {
-        [self setNj_isChangeBlock:@(1)];
+    NSString *name = %orig;
+    if ([name isEqualToString:@"倍速"] && (![self nj_isChangeFlag] || ![[self nj_isChangeFlag] boolValue])) {
+        [self setNj_isChangeFlag:@(1)];
         [self setItems:@[@"0.5",@"1.0",@"1.25",@"1.5",@"2.0",@"3.0"]];
         NSLog(@"%@:%@-%p-%s-name：%@-items:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, name, [self items]);
     }
@@ -342,21 +286,7 @@
 }
 
 %end
- 
 
-%hook VKSettingVCFlowLayoutAdapter
-/*
-- (id)init {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-
-- (long long)numberOfSectionsInCollectionView:(id)view {
-    NSLog(@"%@:%@-%p-%s", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__);
-    return %orig;
-}
-*/
-%end
 
 %hook BBPlayerSupportedPlaybackRate
 
@@ -367,40 +297,6 @@
 }
 
 %end
-
-@interface VKSettingViewTabModel : NSObject
-
-@property (nonatomic, copy) NSString *icon;
-@property (nonatomic) CGSize itemsSize;
-@property (nonatomic, copy) NSArray *items;
-@property (nonatomic) long long selectedIndex;
-@property (nonatomic, copy) NSString *dynamicSelectedString;
-@property (nonatomic) _Bool enableRepeatSelect;
-@property (nonatomic, copy) id selectChangeCallback;
-
-- (id)init;
-
-@end
-
-%hook VKSettingViewTabModel
-
-- (void)setItems:(NSArray *)items {
-    %orig;
-    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, items);
-}
-
-- (void)setSelectedIndex:(long long)selectedIndex {
-    %orig;
-    NSLog(@"%@:%@-%p-%s-items：%lld", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, selectedIndex);
-}
-
-- (void)setSelectChangeCallback:(id)selectChangeCallback {
-    %orig;
-    NSLog(@"%@:%@-%p-%s-items：%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, selectChangeCallback);
-}
-
-%end
-
 
 // [竖屏视频-全屏播放]的播放速度
 %hook NSArray
@@ -446,7 +342,6 @@
 %ctor {
     if (NJ_MASTER_SWITCH_VALUE) {
         %init(App, VKSettingViewSelectModel = objc_getClass("_TtC13VKSettingView11SelectModel"),
-              VKSettingVCFlowLayoutAdapter = objc_getClass("_TtC13VKSettingViewP33_EC00434726C52C8727469D0B0D494E6128VKSettingVCFlowLayoutAdapter"),
-              VKSettingViewTabModel = objc_getClass("_TtC13VKSettingView8TabModel"));
+              VKSettingVCFlowLayoutAdapter = objc_getClass("_TtC13VKSettingViewP33_EC00434726C52C8727469D0B0D494E6128VKSettingVCFlowLayoutAdapter"));
     }
 }
