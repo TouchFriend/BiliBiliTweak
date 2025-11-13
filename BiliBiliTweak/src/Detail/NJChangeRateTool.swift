@@ -15,7 +15,7 @@ public typealias orig_change_vertical_playback_rate_type = @convention(c) (_ a1:
 @_silgen_name("orig_change_vertical_playback_rate")
 nonisolated(unsafe) public var orig_change_vertical_playback_rate: orig_change_vertical_playback_rate_type? = nil
 
-// 绑定一个 C 名字
+// [横屏视频-半屏播放]更改竖屏播放速度方法-修复点击提示问题
 @_cdecl("my_change_vertical_playback_rate")
 func my_change_vertical_playback_rate(a1: Int64, a2: UInt64, a3: Int64, a4: Int64) {
     let origArr = unsafeBitCast(a4, to: [String].self)
@@ -38,7 +38,7 @@ public typealias orig_supportedPlaybackRateModelArr_type = @convention(c) () -> 
 // 定义全局函数指针变量，并绑定一个 C 名字
 @_silgen_name("orig_supportedPlaybackRateModelArr")
 nonisolated(unsafe) public var orig_supportedPlaybackRateModelArr: orig_supportedPlaybackRateModelArr_type? = nil
-
+// [横屏视频-全屏播放]播放速度数组
 @_cdecl("my_supportedPlaybackRateModelArr")
 func my_supportedPlaybackRateModelArr() -> Int64 {
     if let orig_supportedPlaybackRateModelArr {
