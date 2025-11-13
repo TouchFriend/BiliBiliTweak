@@ -9,16 +9,6 @@
 // 最大播放速度
 #define NJ_PLAYBACK_RATE_MAX 4
 
-/*
-static id (*orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray)() = NULL;
-// 播放速度数组
-static id hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray() {
-    id origArr = orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray();
-    NJChangePlaybackRateTool *tool = [[NJChangePlaybackRateTool alloc] init];
-    [tool changePlaybackRateWithRateArray:[NSArray arrayWithArray:origArr]];
-    return origArr;
-}
- */
 
 // 1) 定义原函数的原型 —— 必须和目标函数签名完全一致
 typedef void (*orig_get_max_playback_rate_t)(
@@ -59,31 +49,7 @@ static void my_get_max_playback_rate(
         if (orig_get_max_playback_rate) {
             orig_get_max_playback_rate(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
         }
-//        NSLog(@"[%@] change max rate before get_max_playback_rate called("
-//                  "a1=%d, "
-//                  "a2=%p(%lf), "
-//                  "a3=%lld, a4=%lld, a5=%lld, a6=%lld, a7=%lld, a8=%lld, "
-//                  "a9=%p, "
-//                  "a10=%lld, a11=%u, a12=%lld)",
-//                  nj_logPrefix,
-//                  a1,
-//                  a2, *(float *)a2,
-//                  a3, a4, a5, a6, a7, a8,
-//                  a9,
-//                  a10, a11, a12);
         *(float *)a2 = NJ_PLAYBACK_RATE_MAX;
-//        NSLog(@"[%@] change max rate after get_max_playback_rate called("
-//                  "a1=%d, "
-//                  "a2=%p(%lf), "
-//                  "a3=%lld, a4=%lld, a5=%lld, a6=%lld, a7=%lld, a8=%lld, "
-//                  "a9=%p, "
-//                  "a10=%lld, a11=%u, a12=%lld)",
-//                  nj_logPrefix,
-//                  a1,
-//                  a2, *(float *)a2,
-//                  a3, a4, a5, a6, a7, a8,
-//                  a9,
-//                  a10, a11, a12);
         return;
     }
 
@@ -93,7 +59,7 @@ static void my_get_max_playback_rate(
 }
 
 
-
+/*
 typedef long long (*orig_change_playback_rate_t)(long long result, float a2);
 
 static orig_change_playback_rate_t orig_change_playback_rate = NULL;
@@ -107,6 +73,7 @@ static long long my_change_playback_rate(long long result, float a2) {
     }
     return ret;
 }
+ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -195,13 +162,6 @@ static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
 
 __attribute__((constructor)) static void __init__(void) {
     _dyld_register_func_for_add_image(_register_func_for_add_image);
-    
-    // [横屏视频-全屏播放]播放速度数组
-//    long long rateArray_address = g_slide+0x10D829128;
-//    NSLog(@"[%@] cal func rateArray address:0x%llx", nj_logPrefix, rateArray_address);
-//    MSHookFunction((void *)rateArray_address,
-//            (void*)hook_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray,
-//            (void**)&orig_BBPlayerCommonSwift_BBPlayerPlaybackRateListWidget_rateArray);
     
     // 获取最大播放速度方法
     long long get_max_playback_rate_address = g_slide+0x10F101034;

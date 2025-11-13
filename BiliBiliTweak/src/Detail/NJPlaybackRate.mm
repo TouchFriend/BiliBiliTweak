@@ -8,18 +8,7 @@
 #import "NJCommonDefine.h"
 
 
-
 #define NJ_PLAYBACK_RATE_MAX 4
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -61,31 +50,7 @@ static void my_get_max_playback_rate(
         if (orig_get_max_playback_rate) {
             orig_get_max_playback_rate(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
         }
-
-
-
-
-
-
-
-
-
-
-
-
         *(float *)a2 = NJ_PLAYBACK_RATE_MAX;
-
-
-
-
-
-
-
-
-
-
-
-
         return;
     }
 
@@ -96,24 +61,24 @@ static void my_get_max_playback_rate(
 
 
 
-typedef long long (*orig_change_playback_rate_t)(long long result, float a2);
 
-static orig_change_playback_rate_t orig_change_playback_rate = NULL;
 
-static long long my_change_playback_rate(long long result, float a2) {
 
-    
-    long long ret = 0;
-    if (orig_change_playback_rate) {
-        ret = orig_change_playback_rate(result, a2);
-    }
-    return ret;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 void *orig_change_vertical_playback_rate;
 
@@ -127,8 +92,6 @@ int64_t my_supportedPlaybackRateModelArr();
 #ifdef __cplusplus
 }
 #endif
-
-
 
 
 
@@ -200,13 +163,6 @@ static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
 
 __attribute__((constructor)) static void __init__(void) {
     _dyld_register_func_for_add_image(_register_func_for_add_image);
-    
-    
-
-
-
-
-
     
     
     long long get_max_playback_rate_address = g_slide+0x10F101034;
