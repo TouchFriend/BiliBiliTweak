@@ -80,7 +80,7 @@ extern "C" {
 #endif
 
 void *orig_change_vertical_playback_rate;
-// [横屏视频-半屏播放]更改竖屏播放速度方法-修复点击提示问题
+// [横屏视频-半屏播放]的播放速度-修复点击提示问题
 void my_change_vertical_playback_rate(long long a1, unsigned long long a2, long long a3, long long a4);
 
 
@@ -172,7 +172,7 @@ __attribute__((constructor)) static void __init__(void) {
                    (void**)&orig_get_max_playback_rate);
     
     // void __fastcall sub_10A9966AC(__int64 a1, unsigned __int64 a2, __int64 a3, __int64 a4)
-    // [横屏视频-半屏播放]更改竖屏播放速度方法-修复点击提示问题
+    // [横屏视频-半屏播放]的播放速度-修复点击提示问题
     long long change_vertical_playback_rate_address = g_slide+0x10A9966AC;
     NSLog(@"[%@] cal func change_vertical_playback_rate address:0x%llx", nj_logPrefix, change_vertical_playback_rate_address);
     MSHookFunction((void *)change_vertical_playback_rate_address,

@@ -149,7 +149,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPlayerUpTagWidget; @class BBPlayerSupportedPlaybackRate; @class IJKFFMoviePlayerControllerFFPlay; @class BBPlayerBizGotoStoryWidget; @class VKSettingViewSelectModel; @class BBPlayerOperationTagService; @class BBPlayerPlayerRateModel; @class BBPlayerPortraitScreenBottomWidget; @class NSArray; 
+@class IJKFFMoviePlayerControllerFFPlay; @class BBPlayerBizGotoStoryWidget; @class NSArray; @class BBPlayerPortraitScreenBottomWidget; @class BBPlayerSupportedPlaybackRate; @class BBPlayerUpTagWidget; @class BBPlayerOperationTagService; @class VKSettingViewSelectModel; @class BBPlayerPlayerRateModel; 
 
 
 #line 128 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJDetailPlayerAd.xm"

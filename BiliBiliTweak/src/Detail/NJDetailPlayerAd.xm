@@ -271,7 +271,7 @@
 
 @end
 
-// [横屏视频-半屏播放]更改竖屏播放速度方法-修复显示倍速问题
+// [横屏视频-半屏播放]的播放速度-修复显示倍速问题
 %hook VKSettingViewSelectModel
 
 %property (nonatomic, strong) NSNumber *nj_isChangeFlag;
