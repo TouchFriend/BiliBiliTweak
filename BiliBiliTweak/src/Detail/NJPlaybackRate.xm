@@ -7,6 +7,7 @@
 #import "NJChangePlaybackRateTool.h"
 #import "NJCommonDefine.h"
 #import "BBPlayerObject.h"
+#import "NJPluginInfo.h"
 
 // 最大播放速度
 #define NJ_PLAYBACK_RATE_MAX 4
@@ -114,7 +115,7 @@
 %end
 
 %ctor {
-    if (NJ_MASTER_SWITCH_VALUE) {
+    if (NJ_MASTER_SWITCH_VALUE && [NJChangePlaybackRateTool compatibleCurrentSystemVersion]) {
         %init(App, VKSettingViewSelectModel = objc_getClass("_TtC13VKSettingView11SelectModel"));
     }
 }
@@ -257,6 +258,11 @@ static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
 
 __attribute__((constructor)) static void __init__(void) {
     _dyld_register_func_for_add_image(_register_func_for_add_image);
+    
+    if (![NJChangePlaybackRateTool compatibleCurrentSystemVersion] ||
+        ![NJPluginInfo isPlugin]) {
+        return;
+    }
     
     // 获取最大播放速度方法
     long long get_max_playback_rate_address = g_slide+0x10F101034;

@@ -7,6 +7,7 @@
 
 #import "NJChangePlaybackRateTool.h"
 #import "NJCommonDefine.h"
+#import "NJPluginInfo.h"
 
 static const double NJChangePlaybackRateFlag = 3.0;
 
@@ -122,11 +123,26 @@ static const double NJChangePlaybackRateFlag = 3.0;
     return rateArray;
 }
 
+/// 兼容的系统版本
+/// @return 返回兼容的系统版本
++ (NSArray<NSString *> *)compatibleSystemVersions {
+    return @[@"8.41.0"];
+}
 
-
+/// 是否兼容当前系统版本
+/// @return 返回是否兼容当前系统版本
++ (BOOL)compatibleCurrentSystemVersion {
+    NSString *appVersion = [NJPluginInfo appVersion];
+    NSArray<NSString *> *compatibleSystemVersions = [self compatibleSystemVersions];
+    BOOL flag = [compatibleSystemVersions containsObject:appVersion];
+    return flag;
+}
 
 #pragma mark - Private Methods
 
+/// 是否需要更改速度
+/// - Parameter rateArray: 旧的速度
+/// @return 是否需要更改速度
 - (BOOL)shouldChange:(NSArray *)rateArray {
     BOOL flag = YES;
     for (BBPlayerPlayerRateModel *item in rateArray) {

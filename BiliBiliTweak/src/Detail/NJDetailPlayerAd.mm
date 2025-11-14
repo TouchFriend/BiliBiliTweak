@@ -146,7 +146,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPlayerUpTagWidget; @class BBPlayerOperationTagService; @class BBPlayerPortraitScreenBottomWidget; @class BBPlayerBizGotoStoryWidget; 
+@class BBPlayerUpTagWidget; @class BBPlayerPortraitScreenBottomWidget; @class BBPlayerBizGotoStoryWidget; @class BBPlayerOperationTagService; 
 
 
 #line 125 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJDetailPlayerAd.xm"

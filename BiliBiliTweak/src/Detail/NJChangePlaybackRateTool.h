@@ -36,6 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return 返回新的播放速度
 - (NSArray *)changePlaybackRateWithRateArray:(NSArray *)rateArray;
 
+/// 兼容的系统版本
+/// @return 返回兼容的系统版本
++ (NSArray<NSString *> *)compatibleSystemVersions;
+
+/// 是否兼容当前系统版本
+/// @return 返回是否兼容当前系统版本
++ (BOOL)compatibleCurrentSystemVersion;
+
 @end
 
 NS_ASSUME_NONNULL_END
