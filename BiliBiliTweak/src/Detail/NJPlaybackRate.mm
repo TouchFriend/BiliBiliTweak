@@ -80,14 +80,14 @@ static void my_get_max_playback_rate(
 extern "C" {
 #endif
 
-void *orig_change_vertical_playback_rate;
+void *orig_change_LandscapeVideo_HalfScreenPlayback_rate_tip;
 
-void my_change_vertical_playback_rate(long long a1, unsigned long long a2, long long a3, long long a4);
+void my_change_LandscapeVideo_HalfScreenPlayback_rate_tip(long long a1, unsigned long long a2, long long a3, long long a4);
 
 
-void *orig_supportedPlaybackRateModelArr;
+void *orig_landscapeVideo_fullScreenPlayback_RateModelArr;
 
-int64_t my_supportedPlaybackRateModelArr();
+int64_t my_landscapeVideo_fullScreenPlayback_RateModelArr();
 
 #ifdef __cplusplus
 }
@@ -174,19 +174,19 @@ __attribute__((constructor)) static void __init__(void) {
     
     
     
-    long long change_vertical_playback_rate_address = g_slide+0x10A9966AC;
-    NSLog(@"[%@] cal func change_vertical_playback_rate address:0x%llx", nj_logPrefix, change_vertical_playback_rate_address);
-    MSHookFunction((void *)change_vertical_playback_rate_address,
-                   (void*)my_change_vertical_playback_rate,
-                   (void**)&orig_change_vertical_playback_rate);
+    long long change_LandscapeVideo_HalfScreenPlayback_rate_tip_address = g_slide+0x10A9966AC;
+    NSLog(@"[%@] cal func change_LandscapeVideo_HalfScreenPlayback_rate_tip_address address:0x%llx", nj_logPrefix, change_LandscapeVideo_HalfScreenPlayback_rate_tip_address);
+    MSHookFunction((void *)change_LandscapeVideo_HalfScreenPlayback_rate_tip_address,
+                   (void*)my_change_LandscapeVideo_HalfScreenPlayback_rate_tip,
+                   (void**)&orig_change_LandscapeVideo_HalfScreenPlayback_rate_tip);
     
     
     
-    long long supportedPlaybackRateModelArr_address = g_slide+0x10D82E870;
-    NSLog(@"[%@] cal func supportedPlaybackRateModelArr_address address:0x%llx", nj_logPrefix, supportedPlaybackRateModelArr_address);
-    MSHookFunction((void *)supportedPlaybackRateModelArr_address,
-                   (void*)my_supportedPlaybackRateModelArr,
-                   (void**)&orig_supportedPlaybackRateModelArr);
+    long long landscapeVideo_fullScreenPlayback_RateModelArr_address = g_slide+0x10D82E870;
+    NSLog(@"[%@] cal func landscapeVideo_fullScreenPlayback_RateModelArr_address address:0x%llx", nj_logPrefix, landscapeVideo_fullScreenPlayback_RateModelArr_address);
+    MSHookFunction((void *)landscapeVideo_fullScreenPlayback_RateModelArr_address,
+                   (void*)my_landscapeVideo_fullScreenPlayback_RateModelArr,
+                   (void**)&orig_landscapeVideo_fullScreenPlayback_RateModelArr);
     
     
     changePlaybackRates_LandscapeVideo_HalfScreenPlayback();
