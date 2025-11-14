@@ -19,13 +19,11 @@ nonisolated(unsafe) public var orig_change_vertical_playback_rate: orig_change_v
 @_cdecl("my_change_vertical_playback_rate")
 func my_change_vertical_playback_rate(a1: Int64, a2: UInt64, a3: Int64, a4: Int64) {
     let origArr = unsafeBitCast(a4, to: [String].self)
-    NSLog("[cxzcxz]:my_change_vertical_playback_rate:%@", origArr)
     // 模拟字符串数组
-    let arr = ["0.5", "1.0", "1.25", "1.5", "2.0", "3.0"]
+    let arr = NJChangePlaybackRateTool.playbackRates()
 
     // 获取数组对象在堆上的指针地址
     let arrPtr = unsafeBitCast(arr, to: Int64.self)
-    NSLog("[cxzcxz]:Array object pointer: 0x%@", String(arrPtr, radix: 16))
     
     if let orig_change_vertical_playback_rate {
         orig_change_vertical_playback_rate(a1, a2, a3, arrPtr)

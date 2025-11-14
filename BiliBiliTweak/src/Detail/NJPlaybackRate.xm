@@ -141,23 +141,24 @@ static int write_string_to_address(uintptr_t dest_addr, const char *str) {
 
 // [横屏视频-半屏播放]的播放速度
 static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
+    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
     // 0000000116E60390  30 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  0.5.............
-    write_string_to_address(g_slide+0x116E60390, "0.5");
+    write_string_to_address(g_slide+0x116E60390, [playbackRates[0] UTF8String]);
     
     // 0000000116E603A0  30 2E 37 35 00 00 00 00  00 00 00 00 00 00 00 E4  0.75............
-    write_string_to_address(g_slide+0x116E603A0, "1.0");
+    write_string_to_address(g_slide+0x116E603A0, [playbackRates[1] UTF8String]);
     
     // 0000000116E603B0  31 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.0.............
-    write_string_to_address(g_slide+0x116E603B0, "1.25");
+    write_string_to_address(g_slide+0x116E603B0, [playbackRates[2] UTF8String]);
     
     // 0000000116E603C0  31 2E 32 35 00 00 00 00  00 00 00 00 00 00 00 E4  1.25............
-    write_string_to_address(g_slide+0x116E603C0, "1.5");
+    write_string_to_address(g_slide+0x116E603C0, [playbackRates[3] UTF8String]);
     
     // 0000000116E603D0  31 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.5.............
-    write_string_to_address(g_slide+0x116E603D0 , "2.0");
+    write_string_to_address(g_slide+0x116E603D0 , [playbackRates[4] UTF8String]);
     
     // 0000000116E603E0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
-    write_string_to_address(g_slide+0x116E603E0, "3.0");
+    write_string_to_address(g_slide+0x116E603E0, [playbackRates[5] UTF8String]);
 }
 
 __attribute__((constructor)) static void __init__(void) {

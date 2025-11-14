@@ -3,3 +3,4 @@
 //
 
 #import "NJChangePlaybackRateTool.h"
+#import "NJCommonDefineForSwift.h"

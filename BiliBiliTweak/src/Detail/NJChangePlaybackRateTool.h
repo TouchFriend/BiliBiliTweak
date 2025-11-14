@@ -14,6 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init;
 
+/// 播放速度数组
++ (NSArray<NSString *> *)playbackRates;
+
+
+/// 播放速度的c数组
+/// - Parameter outCount: 数组长度
++ (__unsafe_unretained id _Nonnull *_Nonnull)playbackRatesCArrayWithCount:(NSUInteger *)outCount;
+
 /// 修改播放速度
 /// - Parameter rateArray: 修改后的播放速度
 - (NSArray *)changePlaybackRateWithRateArray:(NSArray *)rateArray;

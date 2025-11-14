@@ -142,23 +142,24 @@ static int write_string_to_address(uintptr_t dest_addr, const char *str) {
 
 
 static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
+    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
     
-    write_string_to_address(g_slide+0x116E60390, "0.5");
-    
-    
-    write_string_to_address(g_slide+0x116E603A0, "1.0");
+    write_string_to_address(g_slide+0x116E60390, [playbackRates[0] UTF8String]);
     
     
-    write_string_to_address(g_slide+0x116E603B0, "1.25");
+    write_string_to_address(g_slide+0x116E603A0, [playbackRates[1] UTF8String]);
     
     
-    write_string_to_address(g_slide+0x116E603C0, "1.5");
+    write_string_to_address(g_slide+0x116E603B0, [playbackRates[2] UTF8String]);
     
     
-    write_string_to_address(g_slide+0x116E603D0 , "2.0");
+    write_string_to_address(g_slide+0x116E603C0, [playbackRates[3] UTF8String]);
     
     
-    write_string_to_address(g_slide+0x116E603E0, "3.0");
+    write_string_to_address(g_slide+0x116E603D0 , [playbackRates[4] UTF8String]);
+    
+    
+    write_string_to_address(g_slide+0x116E603E0, [playbackRates[5] UTF8String]);
 }
 
 __attribute__((constructor)) static void __init__(void) {

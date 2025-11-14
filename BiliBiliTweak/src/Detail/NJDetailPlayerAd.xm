@@ -123,6 +123,7 @@
 #import "NJCommonDefine.h"
 #import "BBPlayerPlayerRateModel.h"
 #import "BBPlayerObject.h"
+#import "NJChangePlaybackRateTool.h"
 
 %group App
 
@@ -279,7 +280,7 @@
     NSString *name = %orig;
     if ([name isEqualToString:@"倍速"] && (![self nj_isChangeFlag] || ![[self nj_isChangeFlag] boolValue])) {
         [self setNj_isChangeFlag:@(1)];
-        [self setItems:@[@"0.5",@"1.0",@"1.25",@"1.5",@"2.0",@"3.0"]];
+        [self setItems:[NJChangePlaybackRateTool playbackRates]];
     }
     return name;
 }
@@ -318,16 +319,13 @@
     // 传数组名即可，数组名会退化为指针类型 __autoreleasing id *
     NSArray *oldRatesArr = %orig(oldRates, oldRatesCount);
     if (cnt == 6 && [origArr isEqualToArray:oldRatesArr]) {
-        __autoreleasing id newRates[] = {
-            @"0.5",
-            @"1.0",
-            @"1.25",
-            @"1.5",
-            @"2.0",
-            @"3.0"
-        };
-        NSUInteger newRatesCount = sizeof(newRates) / sizeof(newRates[0]);
-        NSArray *newRatesArr = %orig(newRates, newRatesCount);
+        NSUInteger newRatesCount = 0;
+        __unsafe_unretained id *newRates = [NJChangePlaybackRateTool playbackRatesCArrayWithCount:&newRatesCount];
+        __autoreleasing id newRatesCopy[newRatesCount];
+        for (NSUInteger i = 0; i < newRatesCount; i++) {
+            newRatesCopy[i] = newRates[i];
+        }
+        NSArray *newRatesArr = %orig(newRatesCopy, newRatesCount);
         return newRatesArr;
     }
     return origArr;

@@ -32,12 +32,40 @@ static const double NJChangePlaybackRateFlag = 3.0;
 #pragma mark - Do Init
 
 - (void)doInit {
-    self.playbackRates = @[@"0.5", @"1.0", @"1.25", @"1.5", @"2.0", @"3.0"];
+    self.playbackRates = [[self class] playbackRates];
 }
 
 #pragma mark - Override Methods
 
 #pragma mark - Public Methods
+
++ (NSArray<NSString *> *)playbackRates {
+    NSUInteger count = 0;
+    __unsafe_unretained id *cArray = [self playbackRatesCArrayWithCount:&count];
+    NSArray<NSString *> *ratesArray = [NSArray arrayWithObjects:cArray count:count];
+    return ratesArray;
+}
+
++ (__unsafe_unretained id *)playbackRatesCArrayWithCount:(NSUInteger *)outCount {
+    static __unsafe_unretained id newRates[6];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        newRates[0] = @"0.5";
+        newRates[1] = @"1.0";
+        newRates[2] = @"1.25";
+        newRates[3] = @"1.5";
+        newRates[4] = @"2.0";
+        newRates[5] = @"3.0";
+    });
+    
+    if (outCount) {
+        *outCount = sizeof(newRates) / sizeof(newRates[0]);
+    }
+    
+    return newRates;
+}
+
+
 
 - (NSArray *)changePlaybackRateWithRateArray:(NSArray *)rateArray {
     if (![self shouldChange:rateArray]) {
