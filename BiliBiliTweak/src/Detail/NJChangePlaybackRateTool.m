@@ -39,6 +39,7 @@ static const double NJChangePlaybackRateFlag = 3.0;
 
 #pragma mark - Public Methods
 
+/// 播放速度数组
 + (NSArray<NSString *> *)playbackRates {
     NSUInteger count = 0;
     __unsafe_unretained id *cArray = [self playbackRatesCArrayWithCount:&count];
@@ -46,6 +47,9 @@ static const double NJChangePlaybackRateFlag = 3.0;
     return ratesArray;
 }
 
+/// 播放速度的c数组
+/// - Parameter outCount: 数组长度
+/// @return 返回播放速度的c数组
 + (__unsafe_unretained id *)playbackRatesCArrayWithCount:(NSUInteger *)outCount {
     static __unsafe_unretained id newRates[6];
     static dispatch_once_t onceToken;
@@ -65,8 +69,41 @@ static const double NJChangePlaybackRateFlag = 3.0;
     return newRates;
 }
 
+/// 获取旧的播放速度
+/// @return 返回旧的播放速度
++ (NSArray<NSString *> *)oldPlaybackRates {
+    NSUInteger count = 0;
+    __unsafe_unretained id *cArray = [self oldPlaybackRatesCArrayWithCount:&count];
+    NSArray<NSString *> *ratesArray = [NSArray arrayWithObjects:cArray count:count];
+    return ratesArray;
+}
+
+/// 获取旧的播放速度的c数组
+/// @param outCount 数组长度
+/// @return 返回的播放速度的c数组
++ (__unsafe_unretained id *)oldPlaybackRatesCArrayWithCount:(NSUInteger *)outCount {
+    static __unsafe_unretained id newRates[6];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        newRates[0] = @"0.5";
+        newRates[1] = @"0.75";
+        newRates[2] = @"1.0";
+        newRates[3] = @"1.25";
+        newRates[4] = @"1.5";
+        newRates[5] = @"2.0";
+    });
+    
+    if (outCount) {
+        *outCount = sizeof(newRates) / sizeof(newRates[0]);
+    }
+    
+    return newRates;
+}
 
 
+/// 修改播放速度
+/// - Parameter rateArray: 旧的的播放速度
+/// @return 返回新的播放速度
 - (NSArray *)changePlaybackRateWithRateArray:(NSArray *)rateArray {
     if (![self shouldChange:rateArray]) {
         return rateArray;

@@ -306,18 +306,15 @@
         return %orig;
     }
     NSArray *origArr = %orig(objects, cnt);
-    // 用 __autoreleasing 修饰数组元素
-    __autoreleasing id oldRates[] = {
-        @"0.5",
-        @"0.75",
-        @"1.0",
-        @"1.25",
-        @"1.5",
-        @"2.0"
-    };
-    NSUInteger oldRatesCount = sizeof(oldRates) / sizeof(oldRates[0]);
+    
+    NSUInteger oldRatesCount = 0;
+    __unsafe_unretained id *oldRates = [NJChangePlaybackRateTool oldPlaybackRatesCArrayWithCount:&oldRatesCount];
+    __autoreleasing id oldRatesCopy[oldRatesCount];
+    for (NSUInteger i = 0; i < oldRatesCount; i++) {
+        oldRatesCopy[i] = oldRates[i];
+    }
     // 传数组名即可，数组名会退化为指针类型 __autoreleasing id *
-    NSArray *oldRatesArr = %orig(oldRates, oldRatesCount);
+    NSArray *oldRatesArr = %orig(oldRatesCopy, oldRatesCount);
     if (cnt == 6 && [origArr isEqualToArray:oldRatesArr]) {
         NSUInteger newRatesCount = 0;
         __unsafe_unretained id *newRates = [NJChangePlaybackRateTool playbackRatesCArrayWithCount:&newRatesCount];
