@@ -121,9 +121,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
-#import "BBPlayerPlayerRateModel.h"
-#import "BBPlayerObject.h"
-#import "NJChangePlaybackRateTool.h"
 
 %group App
 
@@ -232,110 +229,11 @@
 
 %end
 
-/// 视频播放器
-@interface IJKFFMoviePlayerControllerFFPlay : NSObject
-
-@property (readonly, nonatomic) float realPlaybackRate;
-@property (readonly, nonatomic) float maxPlaybackRate;
-@property (nonatomic) float playbackRate;
-
-@end
-
-%hook IJKFFMoviePlayerControllerFFPlay
-
-- (void)setPlaybackRate:(float)playbackRate {
-    %orig;
-    NSLog(@"%@:%@-%p-%s-inputPlaybackRate:%lf-changedPlaybackRate:%lf-realPlaybackRate%lf-maxPlaybackRate:%lf", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, playbackRate, self.playbackRate, self.realPlaybackRate, self.maxPlaybackRate);
-}
-
-%end
-
-// 播放速度模型
-%hook BBPlayerPlayerRateModel
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; value = %f; text = %@>",
-            NSStringFromClass([self class]),
-            self,
-            self.value,
-            self.text ?: @"(null)"];
-}
-
-%end
-
-@interface VKSettingViewSelectModel : NSObject // (Swift)
-
-@property (nonatomic, copy) NSString *icon;
-@property (nonatomic, copy) NSArray *items;
-@property (nonatomic, strong) NSNumber *nj_isChangeFlag;
-
-@end
-
-// [横屏视频-半屏播放]的播放速度-修复显示倍速问题
-%hook VKSettingViewSelectModel
-
-%property (nonatomic, strong) NSNumber *nj_isChangeFlag;
-
-- (NSString *)name {
-    NSString *name = %orig;
-    if ([name isEqualToString:@"倍速"] && (![self nj_isChangeFlag] || ![[self nj_isChangeFlag] boolValue])) {
-        [self setNj_isChangeFlag:@(1)];
-        [self setItems:[NJChangePlaybackRateTool playbackRates]];
-    }
-    return name;
-}
-
-%end
-
-
-%hook BBPlayerSupportedPlaybackRate
-
-+ (id)supportedPlaybackRateModelArr {
-    id ret = %orig;
-    NSLog(@"%@:%@-%p-%s-ret:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, ret);
-    return ret;
-}
-
-%end
-
-// [竖屏视频-全屏播放]的播放速度
-%hook NSArray
-
-+ (instancetype)arrayWithObjects:(id *)objects count:(NSUInteger)cnt {
-    if (cnt != 6) {
-        return %orig;
-    }
-    NSArray *origArr = %orig(objects, cnt);
-    
-    NSUInteger oldRatesCount = 0;
-    __unsafe_unretained id *oldRates = [NJChangePlaybackRateTool oldPlaybackRatesCArrayWithCount:&oldRatesCount];
-    __autoreleasing id oldRatesCopy[oldRatesCount];
-    for (NSUInteger i = 0; i < oldRatesCount; i++) {
-        oldRatesCopy[i] = oldRates[i];
-    }
-    // 传数组名即可，数组名会退化为指针类型 __autoreleasing id *
-    NSArray *oldRatesArr = %orig(oldRatesCopy, oldRatesCount);
-    if (cnt == 6 && [origArr isEqualToArray:oldRatesArr]) {
-        NSUInteger newRatesCount = 0;
-        __unsafe_unretained id *newRates = [NJChangePlaybackRateTool playbackRatesCArrayWithCount:&newRatesCount];
-        __autoreleasing id newRatesCopy[newRatesCount];
-        for (NSUInteger i = 0; i < newRatesCount; i++) {
-            newRatesCopy[i] = newRates[i];
-        }
-        NSArray *newRatesArr = %orig(newRatesCopy, newRatesCount);
-        return newRatesArr;
-    }
-    return origArr;
-}
-
-%end
-
  
 %end
 
 %ctor {
     if (NJ_MASTER_SWITCH_VALUE) {
-        %init(App, VKSettingViewSelectModel = objc_getClass("_TtC13VKSettingView11SelectModel"),
-              VKSettingVCFlowLayoutAdapter = objc_getClass("_TtC13VKSettingViewP33_EC00434726C52C8727469D0B0D494E6128VKSettingVCFlowLayoutAdapter"));
+        %init(App);
     }
 }
