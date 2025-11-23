@@ -9,8 +9,6 @@
 #import "BBPlayerObject.h"
 #import "NJPluginInfo.h"
 
-// 最大播放速度
-#define NJ_PLAYBACK_RATE_MAX 4
 
 %group App
 
@@ -121,58 +119,6 @@
 }
 
 
-
-
-
-// 1) 定义原函数的原型 —— 必须和目标函数签名完全一致
-typedef void (*orig_get_max_playback_rate_t)(
-    int a1,
-    double *a2,
-    long long a3,
-    long long a4,
-    long long a5,
-    long long a6,
-    long long a7,
-    long long a8,
-    unsigned long long *a9, // _QWORD * -> uint64_t *
-    long long a10,
-    unsigned int a11,
-    long long a12
-);
-
-// 2) 保存原函数指针
-static orig_get_max_playback_rate_t orig_get_max_playback_rate = NULL;
-
-// 获取最大播放速度方法
-static void my_get_max_playback_rate(
-    int a1,
-    double *a2,
-    long long a3,
-    long long a4,
-    long long a5,
-    long long a6,
-    long long a7,
-    long long a8,
-    unsigned long long *a9,
-    long long a10,
-    unsigned int a11,
-    long long a12
-) {
-    // sub_10F101034(10LL, &v7, 4LL);
-    if (a1 == 10 && a3 == 4) {
-        if (orig_get_max_playback_rate) {
-            orig_get_max_playback_rate(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
-        }
-        *(float *)a2 = NJ_PLAYBACK_RATE_MAX;
-        return;
-    }
-
-    if (orig_get_max_playback_rate) {
-        orig_get_max_playback_rate(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
-    }
-}
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -185,6 +131,11 @@ void my_change_LandscapeVideo_HalfScreenPlayback_rate_tip(long long a1, unsigned
 void *orig_landscapeVideo_fullScreenPlayback_RateModelArr;
 // [横屏视频-全屏播放]播放速度数组
 int64_t my_landscapeVideo_fullScreenPlayback_RateModelArr();
+
+
+void *orig_get_max_playback_rate;
+// 获取最大播放速度方法
+double my_get_max_playback_rate(long long a1);
 
 #ifdef __cplusplus
 }
@@ -265,7 +216,7 @@ __attribute__((constructor)) static void __init__(void) {
     }
     
     // 获取最大播放速度方法
-    long long get_max_playback_rate_address = g_slide+0x10F101034;
+    long long get_max_playback_rate_address = g_slide+0x10F10449C;
     NSLog(@"[%@] cal func get_max_playback_rate address:0x%llx", nj_logPrefix, get_max_playback_rate_address);
     MSHookFunction((void *)get_max_playback_rate_address,
                    (void*)my_get_max_playback_rate,

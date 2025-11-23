@@ -8,6 +8,24 @@
 import Foundation
 import ObjectiveC.runtime
 
+// 视频最大播放速度
+public let maxPlaybackRateValue = 4.0
+
+
+// 声明原函数类型
+public typealias orig_get_max_playback_rate_type = @convention(c) (_ a1: Int64) -> Double
+
+// 定义全局函数指针变量，并绑定一个 C 名字
+@_silgen_name("orig_get_max_playback_rate")
+nonisolated(unsafe) public var orig_get_max_playback_rate: orig_get_max_playback_rate_type? = nil
+
+// 获取最大播放速度方法
+@_cdecl("my_get_max_playback_rate")
+func my_get_max_playback_rate(a1: Int64) -> Double {
+    return maxPlaybackRateValue
+}
+
+
 // 声明原函数类型
 public typealias orig_change_LandscapeVideo_HalfScreenPlayback_rate_tip_type = @convention(c) (_ a1: Int64, _ a2: UInt64, _ a3: Int64, _ a4: Int64) -> Void
 
