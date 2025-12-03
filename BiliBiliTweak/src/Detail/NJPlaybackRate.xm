@@ -57,6 +57,9 @@
 %property (nonatomic, strong) NSNumber *nj_isChangeFlag;
 
 - (NSString *)name {
+    if (![NJPluginInfo isPlugin]) {
+        return %orig;
+    }
     NSString *name = %orig;
     if ([name isEqualToString:@"倍速"] && (![self nj_isChangeFlag] || ![[self nj_isChangeFlag] boolValue])) {
         [self setNj_isChangeFlag:@(1)];
