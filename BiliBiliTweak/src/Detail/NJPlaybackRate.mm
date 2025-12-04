@@ -34,7 +34,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPlayerPlayerRateModel; @class IJKFFMoviePlayerControllerFFPlay; @class VKSettingViewSelectModel; @class NSArray; @class BBPlayerSupportedPlaybackRate; 
+@class BBPlayerPlayerRateModel; @class NSArray; @class BBPlayerSupportedPlaybackRate; @class VKSettingViewSelectModel; @class IJKFFMoviePlayerControllerFFPlay; 
 
 
 #line 13 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJPlaybackRate.xm"
@@ -156,7 +156,11 @@ extern "C" {
 
 void *orig_change_LandscapeVideo_HalfScreenPlayback_rate_tip;
 
-void my_change_LandscapeVideo_HalfScreenPlayback_rate_tip(long long a1, unsigned long long a2, long long a3, long long a4);
+void my_change_LandscapeVideo_HalfScreenPlayback_rate_tip(int64_t a1, uint64_t a2, int64_t a3, int64_t a4);
+
+void *orig_change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip;
+
+int64_t my_change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip(int64_t a1, uint64_t a2, int64_t a3, int64_t a4, int64_t a5);
 
 
 void *orig_landscapeVideo_fullScreenPlayback_RateModelArr;
@@ -166,7 +170,7 @@ int64_t my_landscapeVideo_fullScreenPlayback_RateModelArr();
 
 void *orig_get_max_playback_rate;
 
-double my_get_max_playback_rate(long long a1);
+double my_get_max_playback_rate(int64_t a1);
 
 #ifdef __cplusplus
 }
@@ -232,10 +236,32 @@ static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
     write_string_to_address(g_slide+0x116E603C0, [playbackRates[3] UTF8String]);
     
     
-    write_string_to_address(g_slide+0x116E603D0 , [playbackRates[4] UTF8String]);
+    write_string_to_address(g_slide+0x116E603D0, [playbackRates[4] UTF8String]);
     
     
     write_string_to_address(g_slide+0x116E603E0, [playbackRates[5] UTF8String]);
+}
+
+
+static void changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback() {
+    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
+    
+    write_string_to_address(g_slide+0x116E789A0, [playbackRates[0] UTF8String]);
+    
+    
+    write_string_to_address(g_slide+0x116E789B0, [playbackRates[1] UTF8String]);
+    
+    
+    write_string_to_address(g_slide+0x116E789C0, [playbackRates[2] UTF8String]);
+    
+    
+    write_string_to_address(g_slide+0x116E789D0, [playbackRates[3] UTF8String]);
+    
+    
+    write_string_to_address(g_slide+0x116E789E0, [playbackRates[4] UTF8String]);
+    
+    
+    write_string_to_address(g_slide+0x116E789F0, [playbackRates[5] UTF8String]);
 }
 
 __attribute__((constructor)) static void __init__(void) {
@@ -263,6 +289,14 @@ __attribute__((constructor)) static void __init__(void) {
     
     
     
+    long long change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip_address = g_slide+0x10B2AC4B0;
+    NSLog(@"[%@] cal func change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip_address address:0x%llx", nj_logPrefix, change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip_address);
+    MSHookFunction((void *)change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip_address,
+                   (void*)my_change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip,
+                   (void**)&orig_change_VerticalVideo_FullScreenPlayback_VerticalModePlayback_rate_tip);
+    
+    
+    
     long long landscapeVideo_fullScreenPlayback_RateModelArr_address = g_slide+0x10D82E870;
     NSLog(@"[%@] cal func landscapeVideo_fullScreenPlayback_RateModelArr_address address:0x%llx", nj_logPrefix, landscapeVideo_fullScreenPlayback_RateModelArr_address);
     MSHookFunction((void *)landscapeVideo_fullScreenPlayback_RateModelArr_address,
@@ -272,6 +306,8 @@ __attribute__((constructor)) static void __init__(void) {
     
     changePlaybackRates_LandscapeVideo_HalfScreenPlayback();
     
+    
+    changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback();
 }
 
 
