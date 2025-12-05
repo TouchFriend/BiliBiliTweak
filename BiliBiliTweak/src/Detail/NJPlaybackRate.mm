@@ -12,6 +12,9 @@
 
 
 
+const size_t NJ_RATE_BLOCK_SIZE = 16;
+
+
 #include <substrate.h>
 #if defined(__clang__)
 #if __has_feature(objc_arc)
@@ -34,10 +37,10 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPlayerSupportedPlaybackRate; @class NSArray; @class BBPlayerPlayerRateModel; @class IJKFFMoviePlayerControllerFFPlay; 
+@class IJKFFMoviePlayerControllerFFPlay; @class BBPlayerPlayerRateModel; @class NSArray; @class BBPlayerSupportedPlaybackRate; 
 
 
-#line 13 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJPlaybackRate.xm"
+#line 16 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJPlaybackRate.xm"
 static void (*_logos_orig$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$)(_LOGOS_SELF_TYPE_NORMAL IJKFFMoviePlayerControllerFFPlay* _LOGOS_SELF_CONST, SEL, float); static void _logos_method$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$(_LOGOS_SELF_TYPE_NORMAL IJKFFMoviePlayerControllerFFPlay* _LOGOS_SELF_CONST, SEL, float); static NSString * (*_logos_orig$App$BBPlayerPlayerRateModel$description)(_LOGOS_SELF_TYPE_NORMAL BBPlayerPlayerRateModel* _LOGOS_SELF_CONST, SEL); static NSString * _logos_method$App$BBPlayerPlayerRateModel$description(_LOGOS_SELF_TYPE_NORMAL BBPlayerPlayerRateModel* _LOGOS_SELF_CONST, SEL); static id (*_logos_meta_orig$App$BBPlayerSupportedPlaybackRate$supportedPlaybackRateModelArr)(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL); static id _logos_meta_method$App$BBPlayerSupportedPlaybackRate$supportedPlaybackRateModelArr(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL); static NSArray* (*_logos_meta_orig$App$NSArray$arrayWithObjects$count$)(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL, id *, NSUInteger); static NSArray* _logos_meta_method$App$NSArray$arrayWithObjects$count$(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL, id *, NSUInteger); 
 
 
@@ -124,7 +127,7 @@ static NSArray* _logos_meta_method$App$NSArray$arrayWithObjects$count$(_LOGOS_SE
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_3257c958(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_aa54f3a0(int __unused argc, char __unused **argv, char __unused **envp) {
     if (NJ_MASTER_SWITCH_VALUE && [NJChangePlaybackRateTool compatibleCurrentSystemVersion]) {
         {Class _logos_class$App$IJKFFMoviePlayerControllerFFPlay = objc_getClass("IJKFFMoviePlayerControllerFFPlay"); { MSHookMessageEx(_logos_class$App$IJKFFMoviePlayerControllerFFPlay, @selector(setPlaybackRate:), (IMP)&_logos_method$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$, (IMP*)&_logos_orig$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$);}Class _logos_class$App$BBPlayerPlayerRateModel = objc_getClass("BBPlayerPlayerRateModel"); { MSHookMessageEx(_logos_class$App$BBPlayerPlayerRateModel, @selector(description), (IMP)&_logos_method$App$BBPlayerPlayerRateModel$description, (IMP*)&_logos_orig$App$BBPlayerPlayerRateModel$description);}Class _logos_class$App$BBPlayerSupportedPlaybackRate = objc_getClass("BBPlayerSupportedPlaybackRate"); Class _logos_metaclass$App$BBPlayerSupportedPlaybackRate = object_getClass(_logos_class$App$BBPlayerSupportedPlaybackRate); { MSHookMessageEx(_logos_metaclass$App$BBPlayerSupportedPlaybackRate, @selector(supportedPlaybackRateModelArr), (IMP)&_logos_meta_method$App$BBPlayerSupportedPlaybackRate$supportedPlaybackRateModelArr, (IMP*)&_logos_meta_orig$App$BBPlayerSupportedPlaybackRate$supportedPlaybackRateModelArr);}Class _logos_class$App$NSArray = objc_getClass("NSArray"); Class _logos_metaclass$App$NSArray = object_getClass(_logos_class$App$NSArray); { MSHookMessageEx(_logos_metaclass$App$NSArray, @selector(arrayWithObjects:count:), (IMP)&_logos_meta_method$App$NSArray$arrayWithObjects$count$, (IMP*)&_logos_meta_orig$App$NSArray$arrayWithObjects$count$);}}
     }
@@ -178,81 +181,77 @@ static void _register_func_for_add_image(const struct mach_header *header, intpt
 }
 
 
-static int write_string_to_address(uintptr_t dest_addr, NSString *str) {
+
+
+
+
+static int write_rate_string_to_address(uintptr_t dest_addr, NSString *str) {
     if (str == nil) {
         return -1;
     }
 
     
-    const size_t BLOCK_SIZE = 16;
-
-    
     const char *utf8Str = [str UTF8String];
     size_t strLength = strlen(utf8Str);   
 
-    if (strLength > (BLOCK_SIZE - 1)) {
+    if (strLength > (NJ_RATE_BLOCK_SIZE - 1)) {
         
-        strLength = BLOCK_SIZE - 1;
+        strLength = NJ_RATE_BLOCK_SIZE - 1;
     }
 
-    uint8_t block[BLOCK_SIZE];
-    memset(block, 0, BLOCK_SIZE);
+    uint8_t block[NJ_RATE_BLOCK_SIZE];
+    memset(block, 0, NJ_RATE_BLOCK_SIZE);
 
     
     memcpy(block, utf8Str, strLength);
 
     
-    block[BLOCK_SIZE - 1] = 0xE0 + (uint8_t)strLength;
+    block[NJ_RATE_BLOCK_SIZE - 1] = 0xE0 + (uint8_t)strLength;
 
     
-    memcpy((void *)dest_addr, block, BLOCK_SIZE);
+    memcpy((void *)dest_addr, block, NJ_RATE_BLOCK_SIZE);
 
     return 0;
 }
 
 
 
-static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
-    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
-    
-    write_string_to_address(g_slide+0x116E60390, playbackRates[0]);
-    
-    
-    write_string_to_address(g_slide+0x116E603A0, playbackRates[1]);
-    
-    
-    write_string_to_address(g_slide+0x116E603B0, playbackRates[2]);
 
+static void write_rate_to_address(uintptr_t baseAddress) {
+    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
+    NSInteger count = playbackRates.count;
+    for (NSInteger i = 0; i < count; i++) {
+        uintptr_t currentAddress = baseAddress + i * NJ_RATE_BLOCK_SIZE;
+        write_rate_string_to_address(currentAddress, playbackRates[i]);
+    }
+}
+
+
+static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
     
-    write_string_to_address(g_slide+0x116E603C0, playbackRates[3]);
-    
-    
-    write_string_to_address(g_slide+0x116E603D0, playbackRates[4]);
-    
-    
-    write_string_to_address(g_slide+0x116E603E0, playbackRates[5]);
+
+
+
+
+
+
+
+    uintptr_t baseAddress = g_slide + 0x116E60390;
+    write_rate_to_address(baseAddress);
 }
 
 
 static void changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback() {
-    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
     
-    write_string_to_address(g_slide+0x116E789A0, playbackRates[0]);
-    
-    
-    write_string_to_address(g_slide+0x116E789B0, playbackRates[1]);
-    
-    
-    write_string_to_address(g_slide+0x116E789C0, playbackRates[2]);
-    
-    
-    write_string_to_address(g_slide+0x116E789D0, playbackRates[3]);
-    
-    
-    write_string_to_address(g_slide+0x116E789E0, playbackRates[4]);
-    
-    
-    write_string_to_address(g_slide+0x116E789F0, playbackRates[5]);
+
+
+
+
+
+
+
+    uintptr_t baseAddress = g_slide+0x116E789A0;
+    write_rate_to_address(baseAddress);
 }
 
 __attribute__((constructor)) static void __init__(void) {

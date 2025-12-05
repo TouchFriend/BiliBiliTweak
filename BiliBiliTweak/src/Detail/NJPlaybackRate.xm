@@ -10,6 +10,9 @@
 #import "NJPluginInfo.h"
 
 
+// 播放速度-目标固定16字节数据块
+const size_t NJ_RATE_BLOCK_SIZE = 16;
+
 %group App
 
 /// 视频播放器
@@ -150,81 +153,77 @@ static void _register_func_for_add_image(const struct mach_header *header, intpt
 }
 
 
-static int write_string_to_address(uintptr_t dest_addr, NSString *str) {
+/// 将速度写入到内存地址
+/// - Parameters:
+///   - dest_addr: 目标内存地址
+///   - str: 速度字符串，比如"1.0"
+static int write_rate_string_to_address(uintptr_t dest_addr, NSString *str) {
     if (str == nil) {
         return -1;
     }
-
-    // 目标固定16字节数据块
-    const size_t BLOCK_SIZE = 16;
 
     // UTF8 字符串
     const char *utf8Str = [str UTF8String];
     size_t strLength = strlen(utf8Str);   // 字符数（不含 \0）
 
-    if (strLength > (BLOCK_SIZE - 1)) {
+    if (strLength > (NJ_RATE_BLOCK_SIZE - 1)) {
         // 只能容纳前15字节 + 最后一字节用于 E0+strLength
-        strLength = BLOCK_SIZE - 1;
+        strLength = NJ_RATE_BLOCK_SIZE - 1;
     }
 
-    uint8_t block[BLOCK_SIZE];
-    memset(block, 0, BLOCK_SIZE);
+    uint8_t block[NJ_RATE_BLOCK_SIZE];
+    memset(block, 0, NJ_RATE_BLOCK_SIZE);
 
     // 前 strLength 字节写入字符串
     memcpy(block, utf8Str, strLength);
 
     // 最后一个字节写入：E0 + 长度
-    block[BLOCK_SIZE - 1] = 0xE0 + (uint8_t)strLength;
+    block[NJ_RATE_BLOCK_SIZE - 1] = 0xE0 + (uint8_t)strLength;
 
     // 将 block 写到目标地址
-    memcpy((void *)dest_addr, block, BLOCK_SIZE);
+    memcpy((void *)dest_addr, block, NJ_RATE_BLOCK_SIZE);
 
     return 0;
 }
 
 
+/// 将速度写入到内存地址
+/// - Parameter baseAddress: 起始内存地址
+static void write_rate_to_address(uintptr_t baseAddress) {
+    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
+    NSInteger count = playbackRates.count;
+    for (NSInteger i = 0; i < count; i++) {
+        uintptr_t currentAddress = baseAddress + i * NJ_RATE_BLOCK_SIZE;
+        write_rate_string_to_address(currentAddress, playbackRates[i]);
+    }
+}
+
 // [横屏视频-半屏播放]的播放速度
 static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
-    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
-    // 0000000116E60390  30 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  0.5.............
-    write_string_to_address(g_slide+0x116E60390, playbackRates[0]);
-    
-    // 0000000116E603A0  30 2E 37 35 00 00 00 00  00 00 00 00 00 00 00 E4  0.75............
-    write_string_to_address(g_slide+0x116E603A0, playbackRates[1]);
-    
-    // 0000000116E603B0  31 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.0.............
-    write_string_to_address(g_slide+0x116E603B0, playbackRates[2]);
-
-    // 0000000116E603C0  31 2E 32 35 00 00 00 00  00 00 00 00 00 00 00 E4  1.25............
-    write_string_to_address(g_slide+0x116E603C0, playbackRates[3]);
-    
-    // 0000000116E603D0  31 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.5.............
-    write_string_to_address(g_slide+0x116E603D0, playbackRates[4]);
-    
-    // 0000000116E603E0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
-    write_string_to_address(g_slide+0x116E603E0, playbackRates[5]);
+    /*
+     0000000116E60390  30 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  0.5.............
+     0000000116E603A0  30 2E 37 35 00 00 00 00  00 00 00 00 00 00 00 E4  0.75............
+     0000000116E603B0  31 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.0.............
+     0000000116E603C0  31 2E 32 35 00 00 00 00  00 00 00 00 00 00 00 E4  1.25............
+     0000000116E603D0  31 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.5.............
+     0000000116E603E0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
+     */
+    uintptr_t baseAddress = g_slide + 0x116E60390;
+    write_rate_to_address(baseAddress);
 }
 
 // [竖屏视频-全屏播放-用竖屏模式播放]的播放速度
 static void changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback() {
-    NSArray<NSString *> *playbackRates = [NJChangePlaybackRateTool playbackRates];
-    // 0000000116E789A0  30 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  0.5.............
-    write_string_to_address(g_slide+0x116E789A0, playbackRates[0]);
-    
-    // 0000000116E789B0  30 2E 37 35 00 00 00 00  00 00 00 00 00 00 00 E4  0.75............
-    write_string_to_address(g_slide+0x116E789B0, playbackRates[1]);
-    
-    // 0000000116E789C0  31 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.0.............
-    write_string_to_address(g_slide+0x116E789C0, playbackRates[2]);
-    
-    // 0000000116E789D0  31 2E 32 35 00 00 00 00  00 00 00 00 00 00 00 E4  1.25............
-    write_string_to_address(g_slide+0x116E789D0, playbackRates[3]);
-    
-    // 0000000116E789E0  31 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.5.............
-    write_string_to_address(g_slide+0x116E789E0, playbackRates[4]);
-    
-    // 0000000116E789F0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
-    write_string_to_address(g_slide+0x116E789F0, playbackRates[5]);
+    /*
+     0000000116E789A0  30 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  0.5.............
+     0000000116E789B0  30 2E 37 35 00 00 00 00  00 00 00 00 00 00 00 E4  0.75............
+     0000000116E789C0  31 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.0.............
+     0000000116E789D0  31 2E 32 35 00 00 00 00  00 00 00 00 00 00 00 E4  1.25............
+     0000000116E789E0  31 2E 35 00 00 00 00 00  00 00 00 00 00 00 00 E3  1.5.............
+     0000000116E789F0  32 2E 30 00 00 00 00 00  00 00 00 00 00 00 00 E3  2.0.............
+     */
+    uintptr_t baseAddress = g_slide+0x116E789A0;
+    write_rate_to_address(baseAddress);
 }
 
 __attribute__((constructor)) static void __init__(void) {
