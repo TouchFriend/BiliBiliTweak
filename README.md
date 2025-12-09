@@ -7,6 +7,11 @@
 
 非越狱手机版本：[无广告版哔哩哔哩](https://github.com/TouchFriend/BiliBiliMApp)
 
+## 功能
+
+- 去除绝大多数广告
+- 增加三倍速播放（仅限`8.41.0`版本）
+
 ## 快速使用
 
 在越狱设备上打开 `Cydia`应用：
@@ -26,11 +31,6 @@
   ```
 
 - 打开`Xcode`，编译运行
-
-
-## 技术交流
-
-Telegram: https://t.me/Qwer6us28FuckAd
 
 ## 声明
 
