@@ -75,6 +75,10 @@ git clone https://github.com/TouchFriend/BiliBiliTweak.git
 
 ------
 
+## 📚 参考资料
+
+- [iOS逆向-哔哩哔哩增加3倍速播放（1）-最大播放速度](https://juejin.cn/post/7582063437414285350)
+
 ## ⚠️ 免责声明
 
 - 本项目仅用于 **iOS 逆向工程学习与技术研究**
