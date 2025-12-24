@@ -9,6 +9,7 @@
 #import "NJApiDataItem.h"
 #import "NSURL+NJPath.h"
 #import "NJApiDataItem.h"
+#import "NJCommonDefine.h"
 #import "NJRcmdCardDataItem.h"
 #import "NJLiveIndexFeedDataItem.h"
 #import "NJLiveSecondGetListDataItem.h"
@@ -17,6 +18,7 @@
 #import "NJTabDataItem.h"
 #import "NJUpperRcmdDataItem.h"
 #import "NJShareChannelsDataItem.h"
+#import "NJSplashDataItem.h"
 
 @interface NJApiDataManger ()
 
@@ -108,6 +110,7 @@
                          [NJTabDataItem class],                 // 首页的版块
                          [NJUpperRcmdDataItem class],           // 详情-你可能感兴趣的up主
                          [NJShareChannelsDataItem class],       // 详情页-分享频道
+                         [NJSplashDataItem class],              // 开屏广告
         ];
     }
     return _itemClasses;

@@ -5,6 +5,7 @@
 
 %group App
 
+/*
 @interface BFCSplashWindow : UIWindow
 
 @end
@@ -17,6 +18,7 @@
 }
 
 %end
+ */
 
 %end
 
