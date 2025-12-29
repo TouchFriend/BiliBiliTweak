@@ -147,7 +147,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPlayerFlexContainerWidget; @class BBPlayerPortraitScreenBottomWidget; @class BBPlayerBizGotoStoryWidget; @class BBPlayerUpTagWidget; @class BBPlayerOperationTagService; @class BBPlayerGotoStoryWidget; 
+@class BBPlayerOperationTagService; @class BBPlayerBizGotoStoryWidget; @class BBPlayerFlexContainerWidget; @class BBPlayerGotoStoryWidget; @class BBPlayerPortraitScreenBottomWidget; @class BBPlayerUpTagWidget; 
 
 
 #line 126 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJDetailPlayerAd.xm"
@@ -274,7 +274,7 @@ static NSSet<NSNumber *> * _logos_method$App$BBPlayerOperationTagService$nj_filt
 
 
 static void _logos_method$App$BBPlayerFlexContainerWidget$didLayoutSubWidgets(_LOGOS_SELF_TYPE_NORMAL BBPlayerFlexContainerWidget* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
-    NSLog(@"%@:%@-%p-%s-subWidgets:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, [self subWidgets]);
+
     _logos_orig$App$BBPlayerFlexContainerWidget$didLayoutSubWidgets(self, _cmd);
 }
 

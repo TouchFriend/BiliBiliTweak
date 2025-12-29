@@ -246,7 +246,7 @@
 %hook BBPlayerFlexContainerWidget
 
 - (void)didLayoutSubWidgets {
-    NSLog(@"%@:%@-%p-%s-subWidgets:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, [self subWidgets]);
+//    NSLog(@"%@:%@-%p-%s-subWidgets:%@", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, [self subWidgets]);
     %orig;
 }
 
