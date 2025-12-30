@@ -7,11 +7,10 @@ Depends: firmware (>= 5.0), mobilesubstrate
 Conflicts: 
 Replaces: 
 Priority: optional
-Architecture: iphoneos-arm
 Author: TouchWorld
 dev:
 Homepage: https://github.com/TouchFriend/BiliBiliTweak
 Depiction:
 Maintainer: TouchWorld
 Icon: https://touchfriend.github.io/depictions/com.touchWorld.bilibiliTweak/icon.png
-
+Architecture: iphoneos-arm
