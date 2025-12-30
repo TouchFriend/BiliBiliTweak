@@ -15,7 +15,7 @@
 		BF2FD6F52DF0846E00883B76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F42DF0846E00883B76 /* Foundation.framework */; };
 		BF2FD6F72DF0846E00883B76 /* CydiaSubstrate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */; };
 		BF9C31562E1294EF00FF67F1 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9C31552E1294EF00FF67F1 /* Network.framework */; };
-		BFB08FD12F03EDEB00A36FC7 /* libroot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB08FD02F03EDEA00A36FC7 /* libroot.a */; };
+		BFB4EF1D2F03F83E004F7292 /* libroot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB4EF1C2F03F83E004F7292 /* libroot.a */; };
 		BFE0B1EC2E40B9630084F9F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE0B1EB2E40B9630084F9F3 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 		BF2FD6F42DF0846E00883B76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BF2FD6F62DF0846E00883B76 /* CydiaSubstrate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CydiaSubstrate.framework; path = Library/Frameworks/CydiaSubstrate.framework; sourceTree = DEVELOPER_DIR; };
 		BF9C31552E1294EF00FF67F1 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
-		BFB08FD02F03EDEA00A36FC7 /* libroot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libroot.a; path = ../../../../../../../opt/MonkeyDev/Librarys/libroot.a; sourceTree = "<group>"; };
+		BFB4EF1C2F03F83E004F7292 /* libroot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libroot.a; path = ../../../../../../../opt/theos/vendor/lib/libroot.a; sourceTree = "<group>"; };
 		BFE0B1EB2E40B9630084F9F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -87,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFB08FD12F03EDEB00A36FC7 /* libroot.a in Frameworks */,
+				BFB4EF1D2F03F83E004F7292 /* libroot.a in Frameworks */,
 				BF09AC332E4CB56B00160C03 /* Security.framework in Frameworks */,
 				BF09AC322E4CB55C00160C03 /* libiconv.tbd in Frameworks */,
 				BF09AC312E4CB55200160C03 /* libz.tbd in Frameworks */,
@@ -123,7 +123,7 @@
 		BF2FD6F12DF0846E00883B76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BFB08FD02F03EDEA00A36FC7 /* libroot.a */,
+				BFB4EF1C2F03F83E004F7292 /* libroot.a */,
 				BF09AC2C2E4CB39B00160C03 /* libz.tbd */,
 				BF09ABB92E4CA33C00160C03 /* libiconv.tbd */,
 				BF09ABB72E4CA1E600160C03 /* Security.framework */,
