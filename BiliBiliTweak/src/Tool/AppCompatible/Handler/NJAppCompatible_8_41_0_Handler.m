@@ -17,12 +17,12 @@
 extern "C" {
 #endif
 
-void *orig_landscapeVideo_fullScreenPlayback_RateModelArr;
+extern void *orig_landscapeVideo_fullScreenPlayback_RateModelArr;
 // [横屏视频-全屏播放]播放速度数组
-int64_t my_landscapeVideo_fullScreenPlayback_RateModelArr();
+int64_t my_landscapeVideo_fullScreenPlayback_RateModelArr(void);
 
 
-void *orig_get_max_playback_rate;
+extern void *orig_get_max_playback_rate;
 // 获取最大播放速度方法
 double my_get_max_playback_rate(int64_t a1);
 

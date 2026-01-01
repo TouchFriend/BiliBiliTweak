@@ -34,7 +34,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class IJKFFMoviePlayerControllerFFPlay; @class BBPlayerPlayerRateModel; @class NSArray; 
+@class BBPlayerPlayerRateModel; @class IJKFFMoviePlayerControllerFFPlay; @class NSArray; 
 
 
 #line 13 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJPlaybackRate.xm"
