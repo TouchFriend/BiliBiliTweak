@@ -37,7 +37,7 @@ const size_t NJ_RATE_BLOCK_SIZE = 16;
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class IJKFFMoviePlayerControllerFFPlay; @class BBPlayerPlayerRateModel; @class NSArray; 
+@class IJKFFMoviePlayerControllerFFPlay; @class NSArray; @class BBPlayerPlayerRateModel; 
 
 
 #line 16 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/NJPlaybackRate.xm"
@@ -56,7 +56,7 @@ static void (*_logos_orig$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$)
 
 static void _logos_method$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$(_LOGOS_SELF_TYPE_NORMAL IJKFFMoviePlayerControllerFFPlay* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, float playbackRate) {
     _logos_orig$App$IJKFFMoviePlayerControllerFFPlay$setPlaybackRate$(self, _cmd, playbackRate);
-
+    NSLog(@"%@:%@-%p-%s-inputPlaybackRate:%lf-changedPlaybackRate:%lf-realPlaybackRate%lf-maxPlaybackRate:%lf", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, playbackRate, self.playbackRate, self.realPlaybackRate, self.maxPlaybackRate);
 }
 
 
@@ -234,6 +234,21 @@ static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback() {
 }
 
 
+static void changePlaybackRates_LandscapeVideo_HalfScreenPlayback_8_76_0() {
+    
+
+
+
+
+
+
+
+
+    uintptr_t baseAddress = g_slide + 0x11E6ACA98;
+    write_rate_to_address(baseAddress);
+}
+
+
 static void changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback() {
     
 
@@ -247,13 +262,21 @@ static void changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePla
     write_rate_to_address(baseAddress);
 }
 
-__attribute__((constructor)) static void __init__(void) {
-    _dyld_register_func_for_add_image(_register_func_for_add_image);
+
+static void changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback_8_76_0() {
     
-    if (![NJChangePlaybackRateTool compatibleCurrentSystemVersion] ||
-        ![NJPluginInfo isPlugin]) {
-        return;
-    }
+
+
+
+
+
+
+
+    uintptr_t baseAddress = g_slide + 0x11E65FA00;
+    write_rate_to_address(baseAddress);
+}
+
+static void playbackRateHook_8_41_0() {
     
     
     long long get_max_playback_rate_address = g_slide + 0x10F10449C;
@@ -283,6 +306,48 @@ __attribute__((constructor)) static void __init__(void) {
     changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback();
 }
 
+static void playbackRateHook_8_76_0() {
+    
+    
+    long long get_max_playback_rate_address = g_slide + 0x114699400;
+    NSLog(@"[%@] cal func get_max_playback_rate address:0x%llx", nj_logPrefix, get_max_playback_rate_address);
+    
+    if (get_max_playback_rate_address != 0) {
+        MSHookFunction((void *)get_max_playback_rate_address,
+                       (void*)my_get_max_playback_rate,
+                       (void**)&orig_get_max_playback_rate);
+    }
+    
+    
+    
+    long long landscapeVideo_fullScreenPlayback_RateModelArr_address = g_slide + 0x10481EDA4;
+    NSLog(@"[%@] cal func landscapeVideo_fullScreenPlayback_RateModelArr_address address:0x%llx", nj_logPrefix, landscapeVideo_fullScreenPlayback_RateModelArr_address);
+    
+    if (landscapeVideo_fullScreenPlayback_RateModelArr_address != 0) {
+        MSHookFunction((void *)landscapeVideo_fullScreenPlayback_RateModelArr_address,
+                       (void*)my_landscapeVideo_fullScreenPlayback_RateModelArr,
+                       (void**)&orig_landscapeVideo_fullScreenPlayback_RateModelArr);
+    }
+    
+    
+    changePlaybackRates_LandscapeVideo_HalfScreenPlayback_8_76_0();
+    
+    
+    changePlaybackRates_VerticalVideo_FullScreenPlayback_VerticalModePlayback_8_76_0();
+}
 
+__attribute__((constructor)) static void __init__(void) {
+    _dyld_register_func_for_add_image(_register_func_for_add_image);
+    
+    if (![NJChangePlaybackRateTool compatibleCurrentSystemVersion] ||
+        ![NJPluginInfo isPlugin]) {
+        return;
+    }
+    NSString *appVersion = [NJPluginInfo appVersion];
+    if ([appVersion isEqualToString:@"8.41.0"]) {
+        playbackRateHook_8_41_0();
+    } else if ([appVersion isEqualToString:@"8.76.0"]) {
+        playbackRateHook_8_76_0();
+    }
 
-
+}

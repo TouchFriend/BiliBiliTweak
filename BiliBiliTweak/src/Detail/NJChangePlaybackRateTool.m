@@ -126,7 +126,7 @@ static const double NJChangePlaybackRateFlag = 3.0;
 /// 兼容的系统版本
 /// @return 返回兼容的系统版本
 + (NSArray<NSString *> *)compatibleSystemVersions {
-    return @[@"8.41.0"];
+    return @[@"8.41.0", @"8.76.0"];
 }
 
 /// 是否兼容当前系统版本
