@@ -42,16 +42,16 @@
 /// 处理版块数据
 /// - Parameter tabData: 版块数据
 - (NSDictionary *)handleItemData:(NSMutableDictionary *)tabData {
-    NSNumber *tabId = tabData[@"id"];
-    if (!tabId || ![tabId isKindOfClass:[NSNumber class]]) {
+    NSString *tabId = tabData[@"tab_id"];
+    if (!tabId || ![tabId isKindOfClass:[NSString class]]) {
         return tabData;
     }
     // 发布（+号）
-    if ([tabId isEqualToNumber:@(670)]) {
+    if ([tabId isEqualToString:@"publish"]) {
         return nil;
     }
     // 会员购
-    if ([tabId isEqualToNumber:@(3511)]) {
+    if ([tabId isEqualToString:@"会员购Bottom"]) {
         return nil;
     }
     return tabData;
