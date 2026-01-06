@@ -4,7 +4,6 @@
 #import "NJCommonDefine.h"
 #import <objc/objc-runtime.h>
 #import "NJSettingSkullTableViewCell.h"
-#import "NJSettingMasterSwitchTableViewCell.h"
 #import "NJSettingSkullViewModel.h"
 #import "NJSettingSeparatorHeaderView.h"
 #import "NJSettingDefine.h"
@@ -139,7 +138,6 @@
     if (!self.nj_isRegisteredCell || ![self.nj_isRegisteredCell boolValue]) {
         self.nj_isRegisteredCell = @(YES);
         // register cell
-        [tableView registerClass:[NJSettingMasterSwitchTableViewCell class] forCellReuseIdentifier:NJ_MASTER_SWITCH_CELL_ID];
         [tableView registerClass:[NJSettingSkullTableViewCell class] forCellReuseIdentifier:NJ_COMMON_CELL_ID];
         
         // register Header
