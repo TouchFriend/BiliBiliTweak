@@ -27,7 +27,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BFCStoreScorePopupManager; @class BFCPushGuideSheetView; @class BFCRestrictedModeTeenagersAlertView; @class BBPhoneTabBarBubbleView; 
+@class BFCStoreScorePopupManager; @class BBPhoneTabBarBubbleView; @class BFCRestrictedModeTeenagersAlertView; @class BFCPushGuideSheetView; 
 
 
 #line 6 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Home/Rcmd/NJRcmdAd.xm"
@@ -77,8 +77,6 @@ static BBPhoneTabBarBubbleView* _logos_method$App$BBPhoneTabBarBubbleView$initWi
 
 
 static BOOL _logos_meta_method$App$BFCRestrictedModeTeenagersAlertView$needShowTeenagersAlert(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
-    BOOL ret = _logos_meta_orig$App$BFCRestrictedModeTeenagersAlertView$needShowTeenagersAlert(self, _cmd);
-    NSLog(@"%@:%@-%p-%s-ret:%d", nj_logPrefix, NSStringFromClass([(id)self class]), self, __FUNCTION__, ret);
     return NO;
 }
 
@@ -86,7 +84,7 @@ static BOOL _logos_meta_method$App$BFCRestrictedModeTeenagersAlertView$needShowT
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_c00dbd47(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_f1ee81aa(int __unused argc, char __unused **argv, char __unused **envp) {
     if (NJ_MASTER_SWITCH_VALUE) {
         {Class _logos_class$App$BFCStoreScorePopupManager = objc_getClass("BFCStoreScorePopupManager"); Class _logos_metaclass$App$BFCStoreScorePopupManager = object_getClass(_logos_class$App$BFCStoreScorePopupManager); { MSHookMessageEx(_logos_metaclass$App$BFCStoreScorePopupManager, @selector(showWithNeed:close:), (IMP)&_logos_meta_method$App$BFCStoreScorePopupManager$showWithNeed$close$, (IMP*)&_logos_meta_orig$App$BFCStoreScorePopupManager$showWithNeed$close$);}{ MSHookMessageEx(_logos_metaclass$App$BFCStoreScorePopupManager, @selector(showFromJSBWithNeed:close:), (IMP)&_logos_meta_method$App$BFCStoreScorePopupManager$showFromJSBWithNeed$close$, (IMP*)&_logos_meta_orig$App$BFCStoreScorePopupManager$showFromJSBWithNeed$close$);}{ MSHookMessageEx(_logos_metaclass$App$BFCStoreScorePopupManager, @selector(showWithParam:need:close:), (IMP)&_logos_meta_method$App$BFCStoreScorePopupManager$showWithParam$need$close$, (IMP*)&_logos_meta_orig$App$BFCStoreScorePopupManager$showWithParam$need$close$);}{ MSHookMessageEx(_logos_class$App$BFCStoreScorePopupManager, @selector(showWithAttentionCount:shareCount:likeCount:watchVideoCount:popperConfig:), (IMP)&_logos_method$App$BFCStoreScorePopupManager$showWithAttentionCount$shareCount$likeCount$watchVideoCount$popperConfig$, (IMP*)&_logos_orig$App$BFCStoreScorePopupManager$showWithAttentionCount$shareCount$likeCount$watchVideoCount$popperConfig$);}Class _logos_class$App$BFCPushGuideSheetView = objc_getClass("BFCPushGuideSheetView"); { MSHookMessageEx(_logos_class$App$BFCPushGuideSheetView, @selector(initWithModel:delegate:spmid:), (IMP)&_logos_method$App$BFCPushGuideSheetView$initWithModel$delegate$spmid$, (IMP*)&_logos_orig$App$BFCPushGuideSheetView$initWithModel$delegate$spmid$);}Class _logos_class$App$BBPhoneTabBarBubbleView = objc_getClass("BBPhoneTabBarBubbleView"); { MSHookMessageEx(_logos_class$App$BBPhoneTabBarBubbleView, @selector(initWithFrame:), (IMP)&_logos_method$App$BBPhoneTabBarBubbleView$initWithFrame$, (IMP*)&_logos_orig$App$BBPhoneTabBarBubbleView$initWithFrame$);}Class _logos_class$App$BFCRestrictedModeTeenagersAlertView = objc_getClass("BFCRestrictedModeTeenagersAlertView"); Class _logos_metaclass$App$BFCRestrictedModeTeenagersAlertView = object_getClass(_logos_class$App$BFCRestrictedModeTeenagersAlertView); { MSHookMessageEx(_logos_metaclass$App$BFCRestrictedModeTeenagersAlertView, @selector(needShowTeenagersAlert), (IMP)&_logos_meta_method$App$BFCRestrictedModeTeenagersAlertView$needShowTeenagersAlert, (IMP*)&_logos_meta_orig$App$BFCRestrictedModeTeenagersAlertView$needShowTeenagersAlert);}}
     }
