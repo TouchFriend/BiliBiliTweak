@@ -33,7 +33,7 @@ NJ_SINGLETON_M(Manager)
 #pragma mark - Do Init
 
 - (void)doInit {
-    self.homeCache = [[NJDiskCache alloc] initWithMaxFileCount:20
+    self.homeCache = [[NJDiskCache alloc] initWithMaxFileCount:15
                                                     filePrefix:@"HomeData"
                                                     folderName:@"HomeCache"];
 }
