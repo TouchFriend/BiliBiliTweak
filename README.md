@@ -12,6 +12,12 @@
 
 ---
 
+## 👀 效果展示
+
+![](Screenshot/combined_original_resolution.png)
+
+![](Screenshot/3x_speed.PNG)
+
 ## 📌 项目说明
 
 - 适用于 **已越狱的 iOS / iPadOS 设备**
@@ -26,8 +32,9 @@
 
 ## ✨ 功能特性
 
-- 🚫 去除启动页 、信息流、详情页等等的广告
-- ⏩ 新增 **3 倍速播放功能**（仅限`8.41.0`版本）
+- 🚫 去除启动页、信息流、详情页等广告
+- 👁️ 可选隐藏底部加号、会员购及「我的」中的不常用服务
+- ⏩ 新增 **3 倍速播放功能**（仅限 `8.41.0`、`8.76.0` 版本）
 
 ---
 
@@ -74,6 +81,12 @@ git clone https://github.com/TouchFriend/BiliBiliTweak.git
 4. 重启哔哩哔哩 App 生效
 
 ------
+
+## ⚙️ 设置
+
+在「我的 → 设置」中提供多种配置选项，支持按需自由调整。
+
+<img src="Screenshot/setting.PNG" style="width:40%;" />
 
 ## 📚 参考资料
 
