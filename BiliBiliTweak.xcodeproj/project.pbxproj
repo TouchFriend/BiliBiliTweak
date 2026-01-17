@@ -40,6 +40,7 @@
 				Package/Library/MobileSubstrate/DynamicLibraries/BiliBiliTweak.dylib,
 				src/Detail/NJDetailAd.xm,
 				src/Detail/NJDetailPlayerAd.xm,
+				src/Detail/PlaybackRate/NJDefaultPlaybackRate.xm,
 				src/Detail/PlaybackRate/NJPlaybackRate.xm,
 				src/Dynamic/NJDynamicAd.xm,
 				src/Home/HotTopic/NJHotTopicAd.xm,
@@ -65,6 +66,7 @@
 			explicitFileTypes = {
 				src/Detail/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/Detail/NJDetailPlayerAd.xm = sourcecode.cpp.objcpp;
+				src/Detail/PlaybackRate/NJDefaultPlaybackRate.xm = sourcecode.cpp.objcpp;
 				src/Detail/PlaybackRate/NJPlaybackRate.xm = sourcecode.cpp.objcpp;
 				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/HotTopic/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
