@@ -58,11 +58,11 @@
     return model;
 }
 
-/// 关注页面的默认版块
+/// 关注页的默认版块
 - (NJSettingSkullViewModel *)followDefaultTab {
     NJSettingSkullViewModel *model = [[NJSettingSkullViewModel alloc] initWithBizId:NJ_FOLLOW_DEFAULT_TAB
                                                                              cellId:NJ_ARROW_CELL_ID
-                                                                              title:@"关注页面的默认版块"];
+                                                                              title:@"关注页的默认版块"];
     model.subTitle = [self followDefaultTabSubTitle];
     return model;
 }

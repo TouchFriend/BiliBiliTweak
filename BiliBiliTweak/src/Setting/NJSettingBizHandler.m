@@ -132,7 +132,7 @@
         model.selected = [model.title isEqualToString:subTitle];
     }
     
-    NJInlineSettingViewController *inlineVC = [[NJInlineSettingViewController alloc] initWithStyle:UITableViewStylePlain title:@"关注页面的默认版块" dataSource:followTabs];
+    NJInlineSettingViewController *inlineVC = [[NJInlineSettingViewController alloc] initWithStyle:UITableViewStylePlain title:@"关注页的默认版块" dataSource:followTabs];
     __weak typeof(self) weakSelf = self;
     inlineVC.selectedHandler = ^(NJInlineSettingModel * _Nonnull model) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
