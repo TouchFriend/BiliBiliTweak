@@ -5,31 +5,28 @@
 
 %group App
 
-// 启动广告
-%hook BFCSplashManager
+@interface BFCSplashLaunchInfo : NSObject
 
-- (id)showSplashWithStyle:(unsigned long long)style delegate:(id)delegate launchInfo:(id)info {
-    /*
-     1: "showBrandSplashWithDelegate:launchInfo:",  品牌启动，显示B站的品牌
-     2: "showBusinessSplashSwift:launchInfo:",  业务启动，就是开屏广告
-     3: "showEventSplashWithDelegate:launchInfo:",  事件启动
-     */
-    // 业务启动 改为 品牌启动
-    if (style == 2) {
-        return %orig(1, delegate, info);
-    }
-    return %orig;
+@property (nonatomic) _Bool launchFlag;
+@property (nonatomic) _Bool linkAwake;
+@property (nonatomic) _Bool inHot;
+@property (readonly, nonatomic) unsigned long long launchType;
+
+/* class methods */
++ (id)infoWith:(_Bool)with linkAwake:(_Bool)awake inHot:(_Bool)hot;
+
+@end
+
+%hook BFCSplashLaunchInfo
+
+- (NSString *)description {
+    NSString *orig = %orig;
+    NSString *ret = [orig stringByAppendingFormat:@"launchFlag: %@,linkAwake:%@,inHot:%@,launchType:%@", @(self.launchFlag), @(self.linkAwake), @(self.inHot), @(self.launchType)];
+    return ret;
 }
 
-%end
-
-// 品牌启动
-%hook BFCBrandSplashViewController
-
-// 持续时间
-- (void)setDuration:(double)duration {
-    // 默认700.000000
-    %orig(0);
++ (id)infoWith:(_Bool)with linkAwake:(_Bool)awake inHot:(_Bool)hot {
+    return %orig(YES, awake, hot);
 }
 
 %end

@@ -27,37 +27,34 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BFCSplashManager; @class BFCBrandSplashViewController; 
+@class BFCSplashLaunchInfo; 
 
 
 #line 6 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Launch/NJLaunchAd.x"
-static id (*_logos_orig$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$)(_LOGOS_SELF_TYPE_NORMAL BFCSplashManager* _LOGOS_SELF_CONST, SEL, unsigned long long, id, id); static id _logos_method$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$(_LOGOS_SELF_TYPE_NORMAL BFCSplashManager* _LOGOS_SELF_CONST, SEL, unsigned long long, id, id); static void (*_logos_orig$App$BFCBrandSplashViewController$setDuration$)(_LOGOS_SELF_TYPE_NORMAL BFCBrandSplashViewController* _LOGOS_SELF_CONST, SEL, double); static void _logos_method$App$BFCBrandSplashViewController$setDuration$(_LOGOS_SELF_TYPE_NORMAL BFCBrandSplashViewController* _LOGOS_SELF_CONST, SEL, double); 
+static NSString * (*_logos_orig$App$BFCSplashLaunchInfo$description)(_LOGOS_SELF_TYPE_NORMAL BFCSplashLaunchInfo* _LOGOS_SELF_CONST, SEL); static NSString * _logos_method$App$BFCSplashLaunchInfo$description(_LOGOS_SELF_TYPE_NORMAL BFCSplashLaunchInfo* _LOGOS_SELF_CONST, SEL); static id (*_logos_meta_orig$App$BFCSplashLaunchInfo$infoWith$linkAwake$inHot$)(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL, _Bool, _Bool, _Bool); static id _logos_meta_method$App$BFCSplashLaunchInfo$infoWith$linkAwake$inHot$(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST, SEL, _Bool, _Bool, _Bool); 
+
+@interface BFCSplashLaunchInfo : NSObject
+
+@property (nonatomic) _Bool launchFlag;
+@property (nonatomic) _Bool linkAwake;
+@property (nonatomic) _Bool inHot;
+@property (readonly, nonatomic) unsigned long long launchType;
+
+
++ (id)infoWith:(_Bool)with linkAwake:(_Bool)awake inHot:(_Bool)hot;
+
+@end
 
 
 
-
-static id _logos_method$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$(_LOGOS_SELF_TYPE_NORMAL BFCSplashManager* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, unsigned long long style, id delegate, id info) {
-    
-
-
-
-
-    
-    if (style == 2) {
-        return _logos_orig$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$(self, _cmd, 1, delegate, info);
-    }
-    return _logos_orig$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$(self, _cmd, style, delegate, info);
+static NSString * _logos_method$App$BFCSplashLaunchInfo$description(_LOGOS_SELF_TYPE_NORMAL BFCSplashLaunchInfo* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+    NSString *orig = _logos_orig$App$BFCSplashLaunchInfo$description(self, _cmd);
+    NSString *ret = [orig stringByAppendingFormat:@"launchFlag: %@,linkAwake:%@,inHot:%@,launchType:%@", @(self.launchFlag), @(self.linkAwake), @(self.inHot), @(self.launchType)];
+    return ret;
 }
 
-
-
-
-
-
-
-static void _logos_method$App$BFCBrandSplashViewController$setDuration$(_LOGOS_SELF_TYPE_NORMAL BFCBrandSplashViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, double duration) {
-    
-    _logos_orig$App$BFCBrandSplashViewController$setDuration$(self, _cmd, 0);
+static id _logos_meta_method$App$BFCSplashLaunchInfo$infoWith$linkAwake$inHot$(_LOGOS_SELF_TYPE_NORMAL Class _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, _Bool with, _Bool awake, _Bool hot) {
+    return _logos_meta_orig$App$BFCSplashLaunchInfo$infoWith$linkAwake$inHot$(self, _cmd, YES, awake, hot);
 }
 
 
@@ -65,9 +62,9 @@ static void _logos_method$App$BFCBrandSplashViewController$setDuration$(_LOGOS_S
  
 
 
-static __attribute__((constructor)) void _logosLocalCtor_60a62657(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_d1a00f3d(int __unused argc, char __unused **argv, char __unused **envp) {
     if (NJ_MASTER_SWITCH_VALUE) {
-        {Class _logos_class$App$BFCSplashManager = objc_getClass("BFCSplashManager"); { MSHookMessageEx(_logos_class$App$BFCSplashManager, @selector(showSplashWithStyle:delegate:launchInfo:), (IMP)&_logos_method$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$, (IMP*)&_logos_orig$App$BFCSplashManager$showSplashWithStyle$delegate$launchInfo$);}Class _logos_class$App$BFCBrandSplashViewController = objc_getClass("BFCBrandSplashViewController"); { MSHookMessageEx(_logos_class$App$BFCBrandSplashViewController, @selector(setDuration:), (IMP)&_logos_method$App$BFCBrandSplashViewController$setDuration$, (IMP*)&_logos_orig$App$BFCBrandSplashViewController$setDuration$);}}
+        {Class _logos_class$App$BFCSplashLaunchInfo = objc_getClass("BFCSplashLaunchInfo"); Class _logos_metaclass$App$BFCSplashLaunchInfo = object_getClass(_logos_class$App$BFCSplashLaunchInfo); { MSHookMessageEx(_logos_class$App$BFCSplashLaunchInfo, @selector(description), (IMP)&_logos_method$App$BFCSplashLaunchInfo$description, (IMP*)&_logos_orig$App$BFCSplashLaunchInfo$description);}{ MSHookMessageEx(_logos_metaclass$App$BFCSplashLaunchInfo, @selector(infoWith:linkAwake:inHot:), (IMP)&_logos_meta_method$App$BFCSplashLaunchInfo$infoWith$linkAwake$inHot$, (IMP*)&_logos_meta_orig$App$BFCSplashLaunchInfo$infoWith$linkAwake$inHot$);}}
     }
 }
 
