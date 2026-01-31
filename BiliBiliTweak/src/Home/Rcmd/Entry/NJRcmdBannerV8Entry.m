@@ -34,28 +34,7 @@
 }
 
 - (NSDictionary *_Nullable)handleBannerData:(NSMutableDictionary *)bannerDic {
-    if ([bannerDic[@"type"] isEqualToString:@"static"]) {
-        return nil;
-    }
-    if ([bannerDic[@"type"] isEqualToString:@"ad"]) {
-        return nil;
-    }
-    if ([bannerDic[@"type"] isEqualToString:@"ad_inline_live"]) {
-        return nil;
-    }
-    if ([bannerDic[@"type"] isEqualToString:@"ad_inline_av"]) {
-        return nil;
-    }
-    if ([bannerDic[@"type"] isEqualToString:@"inline_live"]) {
-        return nil;
-    }
-    if ([bannerDic[@"type"] isEqualToString:@"inline_av"]) {
-        return nil;
-    }
-    if ([bannerDic[@"type"] isEqualToString:@"ad_inline"]) {
-        return nil;
-    }
-    return bannerDic;
+    return nil;
 }
 
 @end
