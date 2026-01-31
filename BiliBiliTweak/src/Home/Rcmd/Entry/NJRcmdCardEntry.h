@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NJRcmdCardEntry : NSObject
 
+- (instancetype)init;
+
+/// 做初始化
+- (void)doInit;
+
 /// 卡片类型
 - (NSString *)cardType;
 
