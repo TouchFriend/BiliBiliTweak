@@ -27,7 +27,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPhoneTabBarBubbleView; @class BFCStoreScorePopupManager; @class BFCPushGuideSheetView; @class BFCRestrictedModeTeenagersAlertView; 
+@class BFCStoreScorePopupManager; @class BFCRestrictedModeTeenagersAlertView; @class BFCPushGuideSheetView; @class BBPhoneTabBarBubbleView; 
 
 
 #line 6 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Home/Rcmd/NJRcmdAd.xm"

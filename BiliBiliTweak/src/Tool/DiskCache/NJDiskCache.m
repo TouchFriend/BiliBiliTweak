@@ -9,7 +9,7 @@
 #import "NSDate+NJCategory.h"
 
 // 沙盒缓存文件夹
-NSString *const NJDiskCacheDirName = @"NJCache";
+NSString *const NJDiskCacheDirName = @"NJCacheShareData";
 
 @interface NJDiskCache ()
 

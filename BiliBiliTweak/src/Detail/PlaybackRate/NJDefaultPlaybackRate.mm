@@ -31,7 +31,7 @@
 
 __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 
-@class BBPlayerPlayback; @class BPInlinePlayableOptions; 
+@class BPInlinePlayableOptions; @class BBPlayerPlayback; 
 
 
 #line 10 "/Users/touchworld/Documents/iOSDisassembler/hook/bilibili/BiliBiliTweak/BiliBiliTweak/src/Detail/PlaybackRate/NJDefaultPlaybackRate.xm"
