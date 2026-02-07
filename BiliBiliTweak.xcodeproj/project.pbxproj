@@ -42,7 +42,6 @@
 				src/Detail/NJDetailPlayerAd.xm,
 				src/Detail/PlaybackRate/NJDefaultPlaybackRate.xm,
 				src/Detail/PlaybackRate/NJPlaybackRate.xm,
-				src/Detail/VerticalMode/NJStoryAd.xm,
 				src/Dynamic/NJDynamicAd.xm,
 				src/Home/HotTopic/NJHotTopicAd.xm,
 				src/Home/Live/NJLiveDetailAd.xm,
@@ -58,29 +57,17 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		BFAB34752F370B2A003E0B4A /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = BF2FD6EC2DF0846E00883B76 /* Headers */;
-			membershipExceptions = (
-				src/Detail/VerticalMode/NJStoryAd.xm,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BF2FD6F82DF0846E00883B76 /* BiliBiliTweak */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				BF2FD70D2DF0847500883B76 /* Exceptions for "BiliBiliTweak" folder in "BiliBiliTweak" target */,
-				BFAB34752F370B2A003E0B4A /* Exceptions for "BiliBiliTweak" folder in "Headers" phase from "BiliBiliTweak" target */,
 			);
 			explicitFileTypes = {
 				src/Detail/NJDetailAd.xm = sourcecode.cpp.objcpp;
 				src/Detail/NJDetailPlayerAd.xm = sourcecode.cpp.objcpp;
 				src/Detail/PlaybackRate/NJDefaultPlaybackRate.xm = sourcecode.cpp.objcpp;
 				src/Detail/PlaybackRate/NJPlaybackRate.xm = sourcecode.cpp.objcpp;
-				src/Detail/VerticalMode/NJStoryAd.xm = sourcecode.cpp.objcpp;
 				src/Dynamic/NJDynamicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/HotTopic/NJHotTopicAd.xm = sourcecode.cpp.objcpp;
 				src/Home/Live/NJLiveDetailAd.xm = sourcecode.cpp.objcpp;
