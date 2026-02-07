@@ -21,6 +21,15 @@
 
 %end
 
+// 上滑提示，比如：上滑观看：男人美白的尽头是内调
+%hook BBStoryScrollGuideModel
+
+- (id)init {
+    return nil;
+}
+
+%end
+
 %end
 
 %ctor {
