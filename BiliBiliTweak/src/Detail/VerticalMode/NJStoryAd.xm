@@ -6,7 +6,7 @@
 //
 
 // 竖屏模式广告
-
+/*
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
 
@@ -37,3 +37,4 @@
         %init(App);
     }
 }
+*/
