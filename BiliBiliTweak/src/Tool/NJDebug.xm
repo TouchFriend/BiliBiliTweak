@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
-/*
+
 @interface GPBMessage : NSObject
 
 @end
@@ -42,4 +42,4 @@
 
 
 %end
-*/
+
