@@ -34,7 +34,6 @@ __asm__(".linker_option \"-framework\", \"CydiaSubstrate\"");
 static BAPIAppInterfaceV1DefaultWordsReply* (*_logos_orig$App$BAPIAppInterfaceV1DefaultWordsReply$initWithData$extensionRegistry$error$)(_LOGOS_SELF_TYPE_INIT BAPIAppInterfaceV1DefaultWordsReply*, SEL, id, id, id *) _LOGOS_RETURN_RETAINED; static BAPIAppInterfaceV1DefaultWordsReply* _logos_method$App$BAPIAppInterfaceV1DefaultWordsReply$initWithData$extensionRegistry$error$(_LOGOS_SELF_TYPE_INIT BAPIAppInterfaceV1DefaultWordsReply*, SEL, id, id, id *) _LOGOS_RETURN_RETAINED; 
 
 
-
 @interface BAPIAppInterfaceV1DefaultWordsReply : NSObject
 
 
@@ -57,7 +56,7 @@ static BAPIAppInterfaceV1DefaultWordsReply* _logos_method$App$BAPIAppInterfaceV1
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_eb769390(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_5c1794ff(int __unused argc, char __unused **argv, char __unused **envp) {
     if (NJ_MASTER_SWITCH_VALUE) {
         {Class _logos_class$App$BAPIAppInterfaceV1DefaultWordsReply = objc_getClass("BAPIAppInterfaceV1DefaultWordsReply"); { MSHookMessageEx(_logos_class$App$BAPIAppInterfaceV1DefaultWordsReply, @selector(initWithData:extensionRegistry:error:), (IMP)&_logos_method$App$BAPIAppInterfaceV1DefaultWordsReply$initWithData$extensionRegistry$error$, (IMP*)&_logos_orig$App$BAPIAppInterfaceV1DefaultWordsReply$initWithData$extensionRegistry$error$);}}
     }
