@@ -2,6 +2,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NJCommonDefine.h"
+#import "NJApiRequest.h"
 
 %group App
 
@@ -54,11 +55,21 @@
 
 %end
 
+// 首页-推荐视图控制器
+%hook BBPegasusViewController
+
+- (void)viewDidLoad {
+    %orig;
+    [NJApiRequest couponAutoReceiver];
+}
+
+%end
+
 %end
 
 %ctor {
     if (NJ_MASTER_SWITCH_VALUE) {
-        %init(App);
+        %init(App,BBPegasusViewController = objc_getClass("BBPegasusSwift.BBPegasusViewController"));
     }
 }
 

@@ -9,6 +9,7 @@
 #import "NJAsset.h"
 #import "NJCommonDefineForSwift.h"
 #import "NJSettingCache.h"
+#import "BFCAccountUserModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,13 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// --------------------- 用户信息 ---------------------
 /// BFCUserModel
 /// BFCAccountUserModel
-
-@interface BFCAccountUserModel : NSObject
-
-@property (nonatomic) long long mid;
-@property (copy, nonatomic) NSString *name;
-
-@end
 
 @interface BBMallAccountManager : NSObject
 
