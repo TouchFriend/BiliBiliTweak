@@ -60,6 +60,7 @@
 
 - (void)viewDidLoad {
     %orig;
+    // 自动领取大会员福利
     [NJApiRequest couponAutoReceiver];
 }
 
