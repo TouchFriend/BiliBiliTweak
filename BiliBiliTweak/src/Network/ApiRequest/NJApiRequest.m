@@ -19,6 +19,10 @@
 
 /// 自动领取大会员福利
 + (void)couponAutoReceiver {
+    if (!NJ_AUTO_RECEIVE_COUPON_VALUE) {
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     // 获取大会员卡券列表
     [self loadMyPrivilegeWithCompletionHandler:^(NJMyPrivilegeModel *model) {
