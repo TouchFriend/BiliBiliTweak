@@ -49,6 +49,7 @@
 				src/Home/Tab/NJTabAd.xm,
 				src/Launch/NJLaunchAd.x,
 				src/Logger/NJLogger.xm,
+				src/Mine/NJDownload.xm,
 				src/Network/NJNetworkService.xm,
 				src/Search/NJSearchResultAd.xm,
 				src/Setting/NJHD2Setting.xm,
@@ -78,6 +79,7 @@
 				src/Home/Tab/NJTabAd.xm = sourcecode.cpp.objcpp;
 				src/Launch/NJLaunchAd.x = sourcecode.c.objc;
 				src/Logger/NJLogger.xm = sourcecode.cpp.objcpp;
+				src/Mine/NJDownload.xm = sourcecode.cpp.objcpp;
 				src/Network/NJNetworkService.xm = sourcecode.cpp.objcpp;
 				src/Search/NJSearchResultAd.xm = sourcecode.cpp.objcpp;
 				src/Setting/NJHD2Setting.xm = sourcecode.cpp.objcpp;
