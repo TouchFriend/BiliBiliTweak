@@ -298,7 +298,7 @@
 					/opt/theos/vendor/lib,
 					/opt/MonkeyDev/Librarys,
 				);
-				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
 				MonkeyDevDeviceIP = "";
@@ -350,7 +350,7 @@
 					/opt/theos/vendor/lib,
 					/opt/MonkeyDev/Librarys,
 				);
-				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
 				MonkeyDevDeviceIP = "";
